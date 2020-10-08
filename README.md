@@ -1,3 +1,3 @@
 # Programovani
 Projekt na OAUH
-Členové: Nela Achillesová, Natka Jakoubková
+Členové: Nela Achillesová, Natálie Jakoubková
