@@ -10,6 +10,7 @@ Studenti by si měli vybrat kurz, který chtějí. Učitelé by si měli vytvoř
 * název
 * počet míst
 * informace o daném kurzu
+
 Cílem je aby byl projekt přehledný a dobře ovladatelný. Projekt by měl být v podobě webové stránky, kde se nejprve student/učitel díky přihlašovacím okénku přihlásí.
 
 Zdroje, které bude na projekt potřeba:
