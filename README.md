@@ -14,7 +14,7 @@ Cílem je aby byl projekt přehledný a dobře ovladatelný. Projekt by měl bý
 
 Zdroje, které bude na projekt potřeba:
 * hardware
-* prostory
+* prostory <br>
 Mezi technologické omezení bychom mohly zařadit programovací jazyk (PHP, JavaScript - o kterých zatím víme), databáze, komunikační protokoly.
 Přípravu na našem projektu jsme začaly v říjnu. Rozložení a realizace projektu začíná v listopadu. V každém měsíci bychom měly splnit část projektu, aby byl hotov.
 
