@@ -3,7 +3,7 @@
 Členové: Nela Achillesová, Natálie Jakoubková <br>
 wireframe: http://prntscr.com/uyytnn <br>
 ## Rezervační systém na červnové kurzy
-###Záměrem projektu je usnadnit studentům i učitelům přehledný zápis kurzů
+### Záměrem projektu je usnadnit studentům i učitelům přehledný zápis kurzů
 
 Projekt je určen do školy. Učitelé si budou moci vytvořit svůj vlastní kurz a studenti se do něj přihlašovat (pomocí svého školního účtu). Respektovat omezení na maximální počet účastníků, umožní nastavit zájem o jiný kurz, jiné přesuny smí dělat jen administrátor.
 Studenti by si měli vybrat kurz, který chtějí. Učitelé by si měli vytvořit kurz, který by měl obsahovat:
