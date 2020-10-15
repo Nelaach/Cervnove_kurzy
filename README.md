@@ -13,10 +13,6 @@ Studenti by si měli vybrat kurz, který chtějí. Učitelé by si měli vytvoř
 
 Cílem je aby byl projekt přehledný a dobře ovladatelný. Projekt by měl být v podobě webové stránky, kde se nejprve student/učitel díky přihlašovacím okénku přihlásí.
 
-Zdroje, které bude na projekt potřeba:
-* hardware
-* prostory
-
 Mezi technologické omezení bychom mohly zařadit programovací jazyk (PHP, JavaScript - o kterých zatím víme), databáze, komunikační protokoly.
 Přípravu na našem projektu jsme začaly v říjnu. Rozložení a realizace projektu začíná v listopadu. V každém měsíci bychom měly splnit část projektu, aby byl hotov.
 
