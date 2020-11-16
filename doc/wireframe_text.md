@@ -3,5 +3,5 @@
 **Učitel:** Bude moct založit si svůj vlastní kurz, kde se žáci budou moci zapisovat.<br>
 **Administrátor:** Bude mít přístup k úpravě již vytvořených kurzů.<br>
 ![Wireframe](wireframe.png)
-![Wireframe](prehled_kurzu)
+![Wireframe](prehled_kurzu.png)
 ![Wireframe](muj_kurz.png)
