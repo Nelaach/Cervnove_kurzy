@@ -1,8 +1,8 @@
 # Programovani
  Projekt na OAUH <br>
 Členové: Nela Achillesová, Natálie Jakoubková <br>
-dokumentace: [klik](/doc) <br>
-diagram: http://prntscr.com/vbpu31 <br>
+[dokumentace](/doc) <br>
+[plán](/plan) <br>
 ## Rezervační systém na červnové kurzy
 ### Záměrem projektu je usnadnit studentům i učitelům přehledný zápis kurzů
 
