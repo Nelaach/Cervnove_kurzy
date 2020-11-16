@@ -2,7 +2,7 @@
  Projekt na OAUH <br>
 Členové: Nela Achillesová, Natálie Jakoubková <br>
 [dokumentace](/doc) <br>
-[plán](/plan) <br>
+[plán](/plan/plan.md) <br>
 ## Rezervační systém na červnové kurzy
 ### Záměrem projektu je usnadnit studentům i učitelům přehledný zápis kurzů
 
