@@ -1,7 +1,7 @@
 # Programovani
  Projekt na OAUH <br>
 Členové: Nela Achillesová, Natálie Jakoubková <br>
-wireframe: http://prntscr.com/uyytnn <br>
+dokumentace: [klik](/doc) <br>
 diagram: http://prntscr.com/vbpu31 <br>
 ## Rezervační systém na červnové kurzy
 ### Záměrem projektu je usnadnit studentům i učitelům přehledný zápis kurzů
@@ -20,5 +20,3 @@ Přípravu na našem projektu jsme začaly v říjnu. Rozložení a realizace pr
 Přímými účastníky na projektu jsou Nela Achillesová a Natálie Jakoubková. Dále také "konzultant" Ing. Bc. Martin Šimůnek.
 
 Rizikovým dopadem na náš projekt by mohla být neúplná zkušenost s programy, nepochopení správné funkčnosti a čas.
-
-Konečný projekt je v okamžiku, kdy bude správně fungovat a účastníci budou spokojeni.
