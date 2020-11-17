@@ -20,7 +20,7 @@ class Pages extends CI_Controller {
             if($row)
             {
                 
-                $data['error']="<h3>Tento název již existuje</h3>";
+                $data['error']="<h4>Tento název již existuje</h4>";
             }
             else
             {
@@ -39,14 +39,17 @@ class Pages extends CI_Controller {
                 $data['kurzy'] = $this->db->query('SELECT * FROM hlavni ORDER BY id_hlavni')->result();
 		$this->load->view('templates/header');
 		$this->load->view('pages/PrehledKurzu', $data);  
-		$this->load->view('templates/footer');
-                 
-                  
-
-
-                
+		$this->load->view('templates/footer');                                                 
                     }
 
+        public function Detailne_PrehledKurzu() 
+        {
+		$data['kurzy'] = $this->db->query('SELECT * FROM hlavni')->result();		
+		$this->load->view('pages/Detailne_PrehledKurzu', $data);  
+                $this->load->view('templates/header', $data);
+		$this->load->view('templates/footer');
+                
+        }
 
 
         

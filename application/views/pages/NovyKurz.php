@@ -20,7 +20,7 @@
 
     <div class="container">	
     <form method="post" action="http://localhost/Kurzy/index.php/Pages/save">
-    <h2 style="text-align: center">Vytvoření kurzu</h2>
+    <h4 style="text-align: center">Vytvoření kurzu</h4>
     <?php
     if (isset($error)) {
         echo $error;
@@ -29,33 +29,36 @@
     ?>
     <div class="row">
         <div class="col-md-6">
-            <h4>Název kurzu</h4>
+             <label>Název kurzu</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 </div>
                 <input type="text" class="form-control" name="nazev">
             </div>
         </div>      
-    </div>
-    <div class="row">
+   
+    
         <div class="col-md-6">
-            <h4> Počet účastníků</4>
+                <label>Počet účastníků</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 </div>
                 <input type="number" class="form-control" name="pocet_mist">
             </div> 
         </div>
-        <div class="col-md-6">
-            <h4>Popis kurzu</h4>
-            <div class="input-group mb-3">                
-                <div class="input-group-prepend">
-                </div>
-                <input type="text" class="form-control"  name="popis">
-
-            </div>     
-        </div>     
-    </div>
+         </div>
+    
+    
+      <div class="form-group">
+    <label>Popis</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="popis"></textarea>
+                   
+  </div>
+    
+    
+    
+    
+    
     <div style="text-align: left">
         <button type="submit" name="register" class="btn btn-primary">Odeslat</button>
     </div>

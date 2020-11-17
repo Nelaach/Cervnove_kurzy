@@ -1,6 +1,5 @@
 <html>
     <head>
-        <title>Obce</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -9,29 +8,23 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
     <body>
-    <div class="container">
-        <div><br>&nbsp</div>
-        <div><br>&nbsp</div>
-   
-    <br>
-   <table class="table">
-               <tr>
-            <td>  <b> Název kurzu </b> </td>
-        <td>  <b> Počet míst </b> </td>
-        </tr>                   
+ <div><br>&nbsp</div>
+  <div><br>&nbsp</div>
+<div class="container">
+    <h4 class="text-center"><?= $kurzy[0]->nazev ?></h4>
 
-        <?php foreach ($kurzy as $kurz) { ?>
-            <tr>
-                <td>
-                    <a href="<?php echo base_url('pages/Detailne_PrehledKurzu/'.$kurz->nazev) ?>">
-                            <?= $kurz->nazev; ?></td>
-                            <td><?= $kurz->pocet_mist; ?></td>                  
-                    </a>
-               
-            </tr>
-        <?php } ?>
-    </table>
-    </div>
+    <br>
+    
+    <label> <b> Popis: </b><?= $kurzy[0]->popis?></label> <br>
+     <label> <b> Počet míst: </b> <?= $kurzy[0]->pocet_mist?></label><br>
+       
+    
+   
+    
+    
         
+
+        
+</div>
     </body>
-</html>
+    </html>

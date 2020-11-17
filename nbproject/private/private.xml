@@ -7,8 +7,8 @@
             <file>file:/C:/xampp/htdocs/Kurzy/application/controllers/pages.php</file>
             <file>file:/C:/xampp/htdocs/Kurzy/application/views/templates/header.php</file>
             <file>file:/C:/xampp/htdocs/Kurzy/application/views/templates/footer.php</file>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/config/routes.php</file>
             <file>file:/C:/xampp/htdocs/Kurzy/application/views/pages/NovyKurz.php</file>
+            <file>file:/C:/xampp/htdocs/Kurzy/application/views/pages/Detailne_PrehledKurzu.php</file>
         </group>
     </open-files>
 </project-private>
