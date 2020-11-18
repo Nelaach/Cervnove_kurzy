@@ -29,7 +29,7 @@ class Pages extends CI_Controller {
                 $data['error']="<h3>Úspěšně přidáno</h3>";
             }
             
-                $this->load->view('templates/header');
+                $this->load->view('templates/header', $data);
 		$this->load->view('pages/NovyKurz', $data);
                 $this->load->view('templates/footer');
             }
@@ -37,14 +37,14 @@ class Pages extends CI_Controller {
                     {
                 
                 $data['kurzy'] = $this->db->query('SELECT * FROM hlavni ORDER BY id_hlavni')->result();
-		$this->load->view('templates/header');
+		$this->load->view('templates/header', $data);
 		$this->load->view('pages/PrehledKurzu', $data);  
 		$this->load->view('templates/footer');                                                 
                     }
 
-        public function Detailne_PrehledKurzu() 
+        public function Detailne_PrehledKurzu($id) 
         {
-		$data['kurzy'] = $this->db->query('SELECT * FROM hlavni')->result();		
+		$data['kurzy'] = $this->db->query('SELECT * FROM hlavni where id_hlavni ='.$id)->result();		
 		$this->load->view('pages/Detailne_PrehledKurzu', $data);  
                 $this->load->view('templates/header', $data);
 		$this->load->view('templates/footer');

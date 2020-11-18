@@ -43,7 +43,7 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 </div>
-                <input type="number" class="form-control" name="pocet_mist">
+                <input type="number" min="5" max="50" class="form-control" name="pocet_mist">
             </div> 
         </div>
          </div>

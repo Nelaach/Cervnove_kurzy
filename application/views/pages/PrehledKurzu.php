@@ -23,7 +23,7 @@
         <?php foreach ($kurzy as $kurz) { ?>
             <tr>
                 <td>
-                    <a href="<?php echo base_url('pages/Detailne_PrehledKurzu/'.$kurz->nazev) ?>">
+                    <a href="<?php echo base_url('pages/Detailne_PrehledKurzu/'.$kurz->id_hlavni) ?>">
                             <?= $kurz->nazev; ?></td>
                             <td><?= $kurz->pocet_mist; ?></td>                  
                     </a>
