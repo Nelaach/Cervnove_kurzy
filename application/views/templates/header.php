@@ -16,13 +16,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" rel="stylesheet">
-<style>
-/**body {
-	//background-image: url("https://images.unsplash.com/photo-1545852528-fa22f7fcd63e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80");
-        //background-repeat:no-repeat;
-       //background-size:cover;
-} **/ 
-</style>
+<?php $jmeno = $this->session->userdata('username')?>
+
     </head>
     
     <body>
@@ -35,12 +30,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       
-       <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('');?>">Nový kurz</a></li>
-       <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('pages/PrehledKurzu');?>">Přehled Kurzů</a></li>
-            
-   
-
+       <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/NovyKurz');?>">Nový kurz</a></li>
+       <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/PrehledKurzu');?>">Přehled Kurzů</a></li>
     </ul>
+      
+      <ul class="navbar-nav">
+    <form class="form-inline my-2 my-lg-0">
+        
+             <li class="nav-item">  <?php echo $jmeno;?></li>
+             <li class="nav-item"> <a class="nav-link"     <a href='<?php echo base_url()."index.php/Main/logout"; ?>'>Odhlásit se</a>  </li>
+            
+    </form>            
+
+      </ul>
+ 
+    
+      
   </div>
 </nav>
     </body>
