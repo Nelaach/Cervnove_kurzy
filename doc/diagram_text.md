@@ -2,5 +2,5 @@ Na začátku se každý přihlásí do své kategorie podle toho jestli se řad�
 
  
 	
-![Use-case diagram](use-case diagram.png)
+![Use-case](use-case.png)
 
