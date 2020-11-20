@@ -4,7 +4,7 @@ class Login_model extends CI_Model {
   
     public function log_in_correctly() {  
   
-        $this->db->where('prezdivka', $this->input->post('username'));  
+        $this->db->where('email', $this->input->post('email'));  
         $this->db->where('heslo', $this->input->post('password'));  
         $query = $this->db->get('prihlasovani');  
   
