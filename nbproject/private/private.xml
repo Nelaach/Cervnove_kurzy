@@ -3,18 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/models/login_model.php</file>
             <file>file:/C:/xampp/htdocs/Kurzy/application/views/pages/PrehledKurzu.php</file>
             <file>file:/C:/xampp/htdocs/Kurzy/application/controllers/Main.php</file>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/views/data.php</file>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/config/config.php</file>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/views/invalid.php</file>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/views/templates/header.php</file>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/views/templates/footer.php</file>
+            <file>file:/C:/xampp/htdocs/Kurzy/application/views/pages/UcitelKurz.php</file>
             <file>file:/C:/xampp/htdocs/Kurzy/application/views/pages/NovyKurz.php</file>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/views/Login_view.php</file>
             <file>file:/C:/xampp/htdocs/Kurzy/application/views/pages/Detailne_PrehledKurzu.php</file>
-            <file>file:/C:/xampp/htdocs/Kurzy/application/config/autoload.php</file>
         </group>
     </open-files>
 </project-private>

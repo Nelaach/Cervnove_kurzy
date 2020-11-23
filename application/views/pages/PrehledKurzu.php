@@ -3,6 +3,8 @@
         <title>Přehled kurzů</title>
     </head>
     <body>
+      
+
         <div class="container">
             <div><br>&nbsp</div>
             <div><br>&nbsp</div>

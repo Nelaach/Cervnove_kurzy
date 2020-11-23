@@ -16,11 +16,16 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" rel="stylesheet">
-        <?php $email = $this->session->userdata('email') ?>
-
     </head>
 
     <body>
+        <?php
+        $email = $this->session->userdata('email');
+        foreach ($ucitel as $key) {
+            $oUcitel = $key->funkce;
+        }
+        ?>
+
         <nav class="mb-1 navbar navbar-expand-lg navbar-dark orange lighten-1 fixed-top">
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,8 +35,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
 
-                    <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/NovyKurz'); ?>">Nový kurz</a></li>
+                    <?php if ($oUcitel == "ucitel") { ?> 
+                        <?php if (!$shoda) { ?> 
+                            <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/NovyKurz'); ?>">Nový kurz</a></li>                
+                        <?php } ?>
+                    <?php } ?>
+
+                    <?php foreach ($shoda as $shod) { ?>
+                        <?php if ($shoda) { ?> 
+                            <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/UcitelKurz'); ?>"><?= $shod->nazev ?></a></li>                
+
+                        <?php } ?>
+                    <?php } ?>
+
+
                     <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/PrehledKurzu'); ?>">Přehled Kurzů</a></li>
+
                 </ul>
 
                 <ul class="navbar-nav">
@@ -43,6 +62,9 @@
                     </form>            
 
                 </ul>
+
+
+
 
 
 
