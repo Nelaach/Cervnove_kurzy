@@ -4,5 +4,6 @@
 - Databáze: MySQL
 - Vývojové prostředí: Netbeans IDE 8.2
 - ER-model
+
 ![ER-model](ER-model.png)
 - UML
