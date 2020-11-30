@@ -1,4 +1,4 @@
-#Návrhová rozhodnutí při tvorbě systému:
+## Návrhová rozhodnutí při tvorbě systému:
 - Programovací jazyky: PHP, JavaScript
 - Framework: Codeigniter
 - Databáze: MySQL
