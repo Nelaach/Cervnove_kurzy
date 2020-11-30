@@ -3,7 +3,7 @@
 Členové: Nela Achillesová, Natálie Jakoubková <br>
 [dokumentace](/doc) <br>
 [plán](/plan/plan.md) <br>
-[design](/doc/design.md) <br>
+
 ## Rezervační systém na červnové kurzy
 ### Záměrem projektu je usnadnit studentům i učitelům přehledný zápis kurzů
 
