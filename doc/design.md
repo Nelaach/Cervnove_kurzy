@@ -4,7 +4,7 @@ Programovací jazyky: PHP, JavaScript <br>
 * Téměř všechny internetové stránky obsahují JavaScript. Usnadňuje komunikaci mezi serverem a vaším počítačem <br>
 
 Framework: Codeigniter
-* Dobře komunikuje/funguje na všech sdílených hostovacích platformách <br>
+* Dobře komunikuje/funguje na všech sdílených hostovacích platformách
 
 Databáze: MySQL <br>
 * Je rychlý, spolehlivý databázový server, snadno dostupný. Můžeme jej využít i pro jiné aplikace programované v řadě programovacích jazyků (C, C++, PHP). <br>
