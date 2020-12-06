@@ -1,7 +1,7 @@
 ## Návrhová rozhodnutí při tvorbě systému:
 Programovací jazyky: PHP, JavaScript <br>
-* PHP je relativně jednoduché na pochopení. Snadno komunikuje s databázemi jako je MySQL a další. Lze jej provozovat s většinou webových serverů a na většině dnes existujících operačních systémů. Velice rozšířeny Open Source skriptovací jazyk pro tvorbu webu.
-* Téměř všechny internetové stránky obsahují JavaScript. Usnadňuje komunikaci mezi serverem a vaším počítačem
+* PHP je relativně jednoduché na pochopení. Snadno komunikuje s databázemi jako je MySQL a další. Lze jej provozovat s většinou webových serverů a na většině dnes existujících operačních systémů. Velice rozšířeny Open Source skriptovací jazyk pro tvorbu webu. <br>
+* Téměř všechny internetové stránky obsahují JavaScript. Usnadňuje komunikaci mezi serverem a vaším počítačem <br>
 Framework: Codeigniter <br>
 * Dobře komunikuje/funguje na všech sdílených hostovacích platformách
 Databáze: MySQL <br>
