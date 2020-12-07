@@ -16,3 +16,4 @@ ER-model <br>
 
 ![ER-model](ER-model.png)
 - UML
+![class diagram](class_diagram.png)
