@@ -1,0 +1,1 @@
+- Webová stránka kurzů je určena pro studenty a učitele, aby zjednodušila přihlašování do kurzu. Učitelé budou mít možnost vytvořit vlastní kurz, vyberou si vhodný název, počet(kolik studentů se může přihlásit) a popíší kurz. Studenti se následně do něj budou moct přihlašovat a zobrazí si veškeré vytvořené kurzy.
