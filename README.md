@@ -1,9 +1,9 @@
 # Programovani
  Projekt na OAUH <br>
 Členové: Nela Achillesová, Natálie Jakoubková <br>
-http://kurzy.4fan.cz/
-Přihlašovací údaje pro studenta: student@seznam.cz heslo - student
-Přihlašovacá údaje učitele: ucitel@seznam.cz heslo - ucitel
+http://kurzy.4fan.cz/ <br>
+Přihlašovací údaje pro studenta: student@seznam.cz heslo - student<br>
+Přihlašovacá údaje učitele: ucitel@seznam.cz heslo - ucitel <br>
 [dokumentace](/doc) <br>
 [plán](/plan/plan.md) <br>
 
