@@ -31,10 +31,6 @@
 
             </table>
         </div> 
-        <?php
-        $v = $this->session->userdata('email');
-        $data['jmeno'] = $this->db->query('select jmeno from prihlasovani where email ="' . $v . '"')->result();
-        $prijmeni = $this->db->query('select prijmeni from prihlasovani where email ="' . $v . '"')->result();
-        ?>
+
     </body>
 </html>

@@ -102,7 +102,7 @@ class Main extends CI_Controller {
                     $this->db->query("insert into hlavni (pocet_mist, nazev, popis,ucitel_jmeno, ucitel_prijmeni, ucitel_email) values(?, ?, ?,?,?,?)", [$n, $e, $p, $oJmeno[0], $oPrijmeni[0], $v]);
                     $data['error'] = "<h3>Úspěšně přidáno</h3>";
                 }
-                
+
                 $this->prehledKurzu();
             }
         } else {
@@ -131,10 +131,58 @@ class Main extends CI_Controller {
     public function Detailne_PrehledKurzu($id) {
         if ($this->session->userdata('currently_logged_in')) {
             $data['kurzy'] = $this->db->query('SELECT * FROM hlavni where id_hlavni =' . $id)->result();
-
             $email = $this->session->userdata('email');
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
+            $data['stejnyKurz'] = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
+            $stejnyKurz = $this->db->query('SELECT nazev FROM hlavni where id_hlavni =' . $id)->result();
+
+            
+            $oStejnyKurz = array();
+            foreach ($stejnyKurz as $row) {
+                $oStejnyKurz[] = $row->nazev;
+            }
+
+            $data['jmena'] = $this->db->query('SELECT jmeno, prijmeni FROM prihlasovani where kurz="' . $oStejnyKurz[0] . '"')->result();
+            $this->load->view('pages/Detailne_PrehledKurzu', $data);
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/footer');
+        } else {
+            redirect('Main/invalid');
+        }
+    }
+
+    public function ZapisDat($id) {
+        if ($this->session->userdata('currently_logged_in')) {
+            $data['kurzy'] = $this->db->query('SELECT * FROM hlavni where id_hlavni =' . $id)->result();
+            $email = $this->session->userdata('email');
+            $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
+            $data['stejnyKurz'] = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
+            $stejnyKurz = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
+
+            $oStejnyKurz = array();
+            foreach ($stejnyKurz as $row) {
+                $oStejnyKurz[] = $row->kurz;
+            }
+        $funkce = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
+        foreach ($funkce as $key) {
+            $oFunkce = $key->funkce;
+        }
+            
+            if ($oFunkce=="student"){
+            $data['jmena'] = $this->db->query('SELECT jmeno, prijmeni FROM prihlasovani where kurz="' . $oStejnyKurz[0] . '"')->result();
+            $kurzy = $this->db->query('SELECT nazev FROM hlavni where id_hlavni =' . $id)->result();
+
+            }
+            $oKurzy = array();
+            foreach ($kurzy as $row) {
+                $oKurzy[] = $row->nazev;
+            }
+
+
+
+            $this->db->query("UPDATE prihlasovani SET kurz='" . $oKurzy[0] . "' where email='" . $email . "'");
 
 
 
@@ -177,15 +225,21 @@ class Main extends CI_Controller {
             $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
 
             $data['nazev'] = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $nazev = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['popis'] = $this->db->query('SELECT popis FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
 
             $e = $this->input->post('nazev');
             $p = $this->input->post('popis');
 
+            $oNazev = array();
+            foreach ($nazev as $row) {
+                $oNazev[] = $row->nazev;
+            }
 
 
             $this->db->query("UPDATE hlavni SET nazev='" . $e . "',popis='" . $p . "' where ucitel_email=?", $email);
+            $this->db->query("UPDATE prihlasovani SET kurz='" . $e . "' where kurz='".$oNazev[0]."'");
             $data['error'] = "<h3>Úspěšně upraveno</h3>";
 
 
