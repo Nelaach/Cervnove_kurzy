@@ -8,3 +8,8 @@
 ![Wireframe](prehled_kurzu.png)
 **Můj kurz:** Obsahuje informace o kurzu, které budou srovnatelné s tím, pokud si žák daný kurz rozklikne, jen tam nebude tlačítko "přihlásit se do kurzu", pouze si bude moct znovu přečíst informace o kurzu, kde je zapsaný.
 ![Wireframe](muj_kurz.png)
+
+![Wireframe](wireframe-13.02.png)
+**Přehled kurzů** - U počtu účastníků se bude zobrazovat aktuální počet přihlášených z maximálního možné počtu účastníků
+**Můj kurz** - Student po přihlášení do kurzu uvidí v menu "Můj kurz", který ho přesměruje najeho kurz.
+**Učitelův kurz** - U kurzu učitele bude tlačítko zamnkout, které umožní učiteli zamknout kurz a díky tomu se nebudou moct do kurzu přihlašovat noví studenti.
