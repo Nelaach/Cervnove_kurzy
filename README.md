@@ -7,7 +7,7 @@ Přihlašovacá údaje učitele: ucitel@seznam.cz heslo - ucitel <br>
 [dokumentace](/doc) <br>
 [plán](/plan/plan.md) <br>
 
-## Rezervační systém na červnové kurzy
+## Rezervační systém na červnové kurzy - 1. pololetí
 ### Záměrem projektu je usnadnit studentům i učitelům přehledný zápis kurzů
 
 Projekt je určen k využití školy. Učitelé si budou moct vytvářet své vlastní kurzy a studenti se do nich přihlašovat (pomocí svého školního účtu). Bude respektovat omezení na maximální počet účastníků, umožní studentům nastavit zájem o kurz, další přesuny smí dělat pouze administrátor.
@@ -24,3 +24,13 @@ Přípravu na našem projektu jsme začaly v říjnu. Rozložení a realizace pr
 Přímými účastníky na projektu jsou Nela Achillesová a Natálie Jakoubková. Dále také "konzultant" Ing. Bc. Martin Šimůnek.
 
 Rizikovým dopadem na náš projekt by mohla být neúplná zkušenost s programy, nepochopení správné funkčnosti a čas.
+
+## Rezervační systém na červnové kurzy - 2. pololetí
+Členové: Nela Achillesová, Natálie Jakoubková, Vojtěch Mahdal
+
+Našim plánem na druhé pololetí, je pokračovat v rozpracovaném projektu.
+* Studentovi se bude zobrazovat v menu kurz, ve kterém je přihlášený a po rozkliknutí to odkáže na daný kurz
+* V přehledu se bude zobrazovat počet účastníků z maximálního počtu - do kurzu se bude moct přihlášit omezený počet účastníků
+* Umožní nastavit zájem o jiný kurz (když je někde plno, zapíši se do "pořadníku", jakmile se uvolní místo, přesunu se do daného kurzu
+* Musí jít k zadanému datu "zamknout", další přesuny může dělat jen administrátor
+* Účastník musí potvrdit přečtení pokynů při zápisu - pokyny se mu zobrazí
