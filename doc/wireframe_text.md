@@ -10,6 +10,6 @@
 ![Wireframe](muj_kurz.png)
 
 ![Wireframe](wireframe-13.02.png)
-**Přehled kurzů** - U počtu účastníků se bude zobrazovat aktuální počet přihlášených z maximálního možné počtu účastníků
-**Můj kurz** - Student po přihlášení do kurzu uvidí v menu "Můj kurz", který ho přesměruje najeho kurz.
-**Učitelův kurz** - U kurzu učitele bude tlačítko zamnkout, které umožní učiteli zamknout kurz a díky tomu se nebudou moct do kurzu přihlašovat noví studenti.
+**Přehled kurzů** - U počtu účastníků se bude zobrazovat aktuální počet přihlášených z maximálního možné počtu účastníků <br>
+**Můj kurz** - Student po přihlášení do kurzu uvidí v menu "Můj kurz", který ho přesměruje najeho kurz. <br>
+**Učitelův kurz** - U kurzu učitele bude tlačítko zamnkout, které umožní učiteli zamknout kurz a díky tomu se nebudou moct do kurzu přihlašovat noví studenti <br>
