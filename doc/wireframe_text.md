@@ -1,14 +1,15 @@
 
 ![Wireframe](prihlasovani.png)
+ Slouží k přihlášení žáka/učitele/administrátora. <br>
 ![Wireframe](prehled_kurzu.png)
-**Přihlašovací okno:** Slouží k přihlášení žáka/učitele/administrátora. <br>
-**Žák:** Uvidí přehled kurzů, které učitelé již vytvořili. Pokud si žák libovolný kurz rozklikne, tak tam nalezne bližší informace o daném kurzu a bude mít možnost se tam zapsat.<br>
-**Učitel:** Bude moct založit si svůj vlastní kurz, kde se žáci budou moci zapisovat.<br>
-**Administrátor:** Bude mít přístup k úpravě již vytvořených kurzů.<br>
-**Přehled kurzů:** Obsahuje všechny kurzy, které učitelé vytvoří. Ke každému kurzu žáci vidí učitele, který kurz pořádá a počet míst, kolik lidí je tam přihlášených z kolika.
+Obsahuje všechny kurzy, které učitelé vytvoří. Ke každému kurzu žáci vidí učitele, který kurz pořádá a počet míst, kolik lidí je tam přihlášených z kolika, místo a cenu.<br>
 ![Wireframe](jednotlive_kurzy.png)
+Po rozkliknutí daného kurzu je možné vidět bližší informace.
 ![Wireframe](prihlaseny_student.png)
-**Můj kurz:** Obsahuje informace o kurzu, které budou srovnatelné s tím, pokud si žák daný kurz rozklikne, jen tam nebude tlačítko "přihlásit se do kurzu", pouze si bude moct znovu přečíst informace o kurzu, kde je zapsaný.
+Student přihlášený do kurzu má kurz obarvený v přehledu zelenou barvou a v menu se nachází název kurzu, do kterého se přihlásil a po kliknutí na něj ho to tam i přesměruje.
 ![Wireframe](novy_kurz.png)
+Učitel si bude moct založit si svůj vlastní kurz, kde se žáci budou moci zapisovat.<br>
 ![Wireframe](uprava_kurzu.png)
+Učitel po vytvoření kurzu může následně kurz i upravovat.
 ![Wireframe](mazani_admin.png)
+Admin bude mít možnost vymazat kterýkoliv kurz po rozkliknutí.
