@@ -2,4 +2,4 @@
 [wireframe](wireframe_text.md) <br>
 [design](design.md) <br>
 [dokumentace](dokumentace.pdf) <br>
- 
+[persony](Persony/dokumentace.pdf) <br>
