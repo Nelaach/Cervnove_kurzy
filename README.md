@@ -1,10 +1,6 @@
 # Programovani
  Projekt na OAUH <br>
 Členové: Nela Achillesová, Natálie Jakoubková <br>
-http://kurzy.4fan.cz/ <br>
-Přihlašovací údaje pro studenta: student@seznam.cz heslo - student<br>
-Přihlašovacá údaje učitele: ucitel@seznam.cz heslo - ucitel <br>
-[dokumentace](/doc) <br>
 [plán](/plan/plan.md) <br>
 
 ## Rezervační systém na červnové kurzy - 1. pololetí
@@ -34,3 +30,11 @@ Našim plánem na druhé pololetí, je pokračovat v rozpracovaném projektu.
 * Umožní nastavit zájem o jiný kurz (když je někde plno, zapíši se do "pořadníku", jakmile se uvolní místo, přesunu se do daného kurzu
 * Musí jít k zadanému datu "zamknout", další přesuny může dělat jen administrátor
 * Účastník musí potvrdit přečtení pokynů při zápisu - pokyny se mu zobrazí
+
+## Dokumentace
+[dokumentace](/doc) <br>
+
+## Webová stránka
+http://kurzy.4fan.cz/ <br>
+Přihlašovací údaje pro studenta: student@seznam.cz heslo - student<br>
+Přihlašovacá údaje učitele: ucitel@seznam.cz heslo - ucitel <br>
