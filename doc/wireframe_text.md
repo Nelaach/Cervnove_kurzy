@@ -13,3 +13,7 @@ Učitel si bude moct založit svůj vlastní kurz, kde se studenti budou moci za
 Učitel po vytvoření kurzu může následně kurz upravovat i uzamknout. <br>
 ![Wireframe](mazani_admin.png) <br>
 Administrátor bude mít možnost vymazat kterýkoliv kurz po rozkliknutí. <br>
+![Wireframe](admin_zamknuti.png) <br>
+Administrátor může kliknout na uzamknutí kurzů, zamkne tak všechny kurzy a znepřístupní přesuny z jednoho kurzu do druhého.
+![Wireframe](admin_odemknuti.png) <br>
+Po zamknutí všech kurzů se administrátorovi změní tlačítko na "odemknout" a pomocí toho může kurzy odemknout a opět zpřístupnit přesuny.
