@@ -36,6 +36,8 @@
             <label> <b> &nbsp&nbspPopis: </b><?= $kurzy[0]->popis ?></label> <br>
             <label> <b> &nbsp&nbspPočet míst: </b> <?= $kurzy[0]->pocet_mist ?></label><br>
             <label> <b> &nbsp&nbspUčitel/ka: </b> <?= $kurzy[0]->ucitel_jmeno ?> &nbsp<?= $kurzy[0]->ucitel_prijmeni ?></label><br>
+            <label> <b> &nbsp&nbspMísto: </b> <?= $kurzy[0]->misto ?></label><br>
+            <label> <b> &nbsp&nbspCena: </b> <?= $kurzy[0]->cena ?></label><br>
             <?php
             foreach ($kurzy as $key) {
                 $oKurzy = $key->id_hlavni;

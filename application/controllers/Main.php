@@ -10,14 +10,14 @@ class Main extends CI_Controller {
 
     public function login() {
         $this->load->view('Login_view');
-        $this->load->view('templates/footer');
+        $this->load->view('templates/Footer');
     }
 
     public function data() {
         if ($this->session->userdata('currently_logged_in')) {
             $this->prehledKurzu();
         } else {
-            redirect('Main/invalid');
+            redirect('Main/Invalid');
         }
     }
 
@@ -35,17 +35,17 @@ class Main extends CI_Controller {
             }
             $vytvorenyKurz = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $this->load->view('templates/header', $data);
+            $this->load->view('templates/Header', $data);
 
             if (!$vytvorenyKurz) {
                 if ($oFunkce[0] == "ucitel") {
-
+                    
                     $this->load->view('pages/NovyKurz', $data);
-                    $this->load->view('templates/footer');
+                    $this->load->view('templates/Footer');
                 }
             }
         } else {
-            redirect('Main/invalid');
+            redirect('Main/Invalid');
         }
     }
 
@@ -65,6 +65,9 @@ class Main extends CI_Controller {
             $data['nazev'] = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['popis'] = $this->db->query('SELECT popis FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['misto'] = $this->db->query('SELECT misto FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['cena'] = $this->db->query('SELECT cena FROM hlavni where ucitel_email="' . $email . '"')->result();
+
             $vytvorenyKurz = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['kurzy'] = $this->db->query('SELECT * FROM hlavni ORDER BY id_hlavni')->result();
 
@@ -86,7 +89,8 @@ class Main extends CI_Controller {
             $n = $this->input->post('pocet_mist');
             $e = $this->input->post('nazev');
             $p = $this->input->post('popis');
-
+            $m = $this->input->post('misto');
+            $c = $this->input->post('cena');
 
 
 
@@ -99,7 +103,7 @@ class Main extends CI_Controller {
                 if ($omezeni >= 1) {
                     
                 } else {
-                    $this->db->query("insert into hlavni (pocet_mist, nazev, popis,ucitel_jmeno, ucitel_prijmeni, ucitel_email) values(?, ?, ?,?,?,?)", [$n, $e, $p, $oJmeno[0], $oPrijmeni[0], $v]);
+                    $this->db->query("insert into hlavni (pocet_mist, nazev, popis,ucitel_jmeno, ucitel_prijmeni, ucitel_email, misto, cena) values(?, ?, ?,?,?,?,?,?)", [$n, $e, $p, $oJmeno[0], $oPrijmeni[0], $v, $m, $c]);
                     $data['error'] = "<h3>Úspěšně přidáno</h3>";
                 }
 
@@ -120,11 +124,11 @@ class Main extends CI_Controller {
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
 
-            $this->load->view('templates/header', $data);
+            $this->load->view('templates/Header', $data);
             $this->load->view('pages/PrehledKurzu', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/Footer');
         } else {
-            redirect('Main/invalid');
+            redirect('Main/Invalid');
         }
     }
 
@@ -145,10 +149,10 @@ class Main extends CI_Controller {
 
             $data['jmena'] = $this->db->query('SELECT jmeno, prijmeni FROM prihlasovani where kurz="' . $oStejnyKurz[0] . '"')->result();
             $this->load->view('pages/Detailne_PrehledKurzu', $data);
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/Header', $data);
+            $this->load->view('templates/Footer');
         } else {
-            redirect('Main/invalid');
+            redirect('Main/Invalid');
         }
     }
 
@@ -187,10 +191,10 @@ class Main extends CI_Controller {
 
 
             $this->load->view('pages/Detailne_PrehledKurzu', $data);
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/Header', $data);
+            $this->load->view('templates/Footer');
         } else {
-            redirect('Main/invalid');
+            redirect('Main/Invalid');
         }
     }
 
@@ -204,15 +208,17 @@ class Main extends CI_Controller {
             $data['nazev'] = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['popis'] = $this->db->query('SELECT popis FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['misto'] = $this->db->query('SELECT misto FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['cena'] = $this->db->query('SELECT cena FROM hlavni where ucitel_email="' . $email . '"')->result();
 
             $funkce = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $this->load->view('templates/header', $data);
+            $this->load->view('templates/Header', $data);
             if ($funkce) {
                 $this->load->view('pages/UcitelKurz', $data);
-                $this->load->view('templates/footer');
+                $this->load->view('templates/Footer');
             }
         } else {
-            redirect('Main/invalid');
+            redirect('Main/Invalid');
         }
     }
 
@@ -228,9 +234,14 @@ class Main extends CI_Controller {
             $nazev = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['popis'] = $this->db->query('SELECT popis FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['misto'] = $this->db->query('SELECT misto FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['cena'] = $this->db->query('SELECT cena FROM hlavni where ucitel_email="' . $email . '"')->result();
 
             $e = $this->input->post('nazev');
             $p = $this->input->post('popis');
+            $m = $this->input->post('misto');
+            $c = $this->input->post('cena');
+
 
             $oNazev = array();
             foreach ($nazev as $row) {
@@ -238,21 +249,21 @@ class Main extends CI_Controller {
             }
 
 
-            $this->db->query("UPDATE hlavni SET nazev='" . $e . "',popis='" . $p . "' where ucitel_email=?", $email);
+            $this->db->query("UPDATE hlavni SET nazev='" . $e . "', popis='" . $p . "', misto='" . $m . "', cena='" . $c . "' where ucitel_email=?", $email);
             $this->db->query("UPDATE prihlasovani SET kurz='" . $e . "' where kurz='".$oNazev[0]."'");
             $data['error'] = "<h3>Úspěšně upraveno</h3>";
 
 
-            $this->load->view('templates/header', $data);
+            $this->load->view('templates/Header', $data);
             $this->load->view('pages/UcitelKurz', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/Footer');
         } else {
-            redirect('Main/invalid');
+            redirect('Main/Invalid');
         }
     }
 
     public function invalid() {
-        $this->load->view('invalid');
+        $this->load->view('Invalid');
     }
 
     public function login_action() {
@@ -272,7 +283,7 @@ class Main extends CI_Controller {
             $this->session->set_userdata($data);
             redirect('Main/data');
         } else {
-            $this->load->view('login_view');
+            $this->load->view('Login_view');
         }
     }
 
@@ -290,7 +301,7 @@ class Main extends CI_Controller {
 
     public function logout() {
         $this->session->sess_destroy();
-        redirect('Main/login');
+        redirect('Main/Login');
     }
 
 }

@@ -41,6 +41,26 @@
                         </div> 
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Místo</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input type="text" class="form-control" name="misto">
+                        </div>
+                    </div>      
+
+
+                    <div class="col-md-6">
+                        <label>Cena</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input type="number" class="form-control" name="cena">
+                        </div> 
+                    </div>
+                </div>
 
 
                 <div class="form-group">

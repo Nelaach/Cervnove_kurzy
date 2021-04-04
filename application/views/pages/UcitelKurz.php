@@ -21,6 +21,9 @@
  <?php
 foreach ($nazev as $key ) {$oNazev=$key->nazev;}
 foreach ($popis as $key ) {$oPopis=$key->popis;}
+foreach ($misto as $key ) {$oMisto=$key->misto;}
+foreach ($cena as $key ) {$oCena=$key->cena;}
+
 
 
 ?>
@@ -51,6 +54,26 @@ foreach ($popis as $key ) {$oPopis=$key->popis;}
                             <div class="input-group-prepend">                               
                             </div>
                             <input type="number" min="5" max="50" class="form-control" value="<?= $pocet[0]->pocet_mist ?>" readonly name="pocet_mist">
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Místo</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input type="text" class="form-control" name="misto" value="<?= $oMisto ?>">
+                        </div>
+                    </div>      
+
+
+                    <div class="col-md-6">
+                        <label>Cena</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">                               
+                            </div>
+                            <input type="number"  class="form-control" value="<?= $oCena ?>" name="cena">
                         </div> 
                     </div>
                 </div>
