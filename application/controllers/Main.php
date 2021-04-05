@@ -289,9 +289,8 @@ class Main extends CI_Controller {
             }
 
             $this->load->view('templates/Header', $data);
-            $this->load->view('templates/UcitelKurz', $data);
             $this->load->view('templates/Footer');
- 
+
     } else {
         redirect('Main/Invalid');
     }
