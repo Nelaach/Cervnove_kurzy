@@ -23,14 +23,12 @@ foreach ($nazev as $key ) {$oNazev=$key->nazev;}
 foreach ($popis as $key ) {$oPopis=$key->popis;}
 foreach ($misto as $key ) {$oMisto=$key->misto;}
 foreach ($cena as $key ) {$oCena=$key->cena;}
-
-
-
+foreach ($uzamknuto as $key ) {$oUzamknuto=$key->uzamknuto;}
 ?>
         
 
         <div class="container">	
-            <form method="post" action="http://localhost/Kurzy/index.php/main/zmena">
+            <form method="post" action="<?php echo base_url('main/zmena') ?>">
                 <h4 style="text-align: center">Úprava kurzu</h4>
                 <?php
                 if (isset($error)) {
@@ -90,10 +88,23 @@ foreach ($cena as $key ) {$oCena=$key->cena;}
 
                 <div style="text-align: left">
                     <button type="submit" name="register" class="btn btn-primary">Přepsat</button>
-                </div>
-            </form>
+                    <?php
+        if ($oUzamknuto == "1") {
+                ?>
+                    <a class="btn btn-primary " href="<?php echo base_url('main/uzamknout') ?>" role="button">Odemknout</a>
+            <?php } ?>  
 
+            <?php
+        if ($oUzamknuto == "0") {
+                ?>
+                    <a class="btn btn-primary " href="<?php echo base_url('main/uzamknout') ?>" role="button">Uzamknout</a>
+            <?php } ?>  
+
+               </div>
+            </form>
+ 
        </div>
+
 
 
 

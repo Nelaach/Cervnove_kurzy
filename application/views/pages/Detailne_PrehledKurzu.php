@@ -1,82 +1,100 @@
 <html>
-    <head>
-        <title>Detailnější přehled kurzů</title>
 
-    </head>
-    <script>
-        window.onload = function () {
-            if (!window.location.hash) {
-                window.location = window.location + '#loaded';
-                window.location.reload();
-            }
-        };
-    </script>
+<head>
+    <title>Detailnější přehled kurzů</title>
 
-    <style>
-        button {color: white;border-color: orange; background-color: orange}
-    </style>
-    <body>
+</head>
+<script>
+    window.onload = function() {
+        if (!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        }
+    };
+</script>
 
+<style>
+    button {
+        color: white;
+        border-color: orange;
+        background-color: orange
+    }
+
+    h5 {
+        color: red;
+
+    }
+</style>
+
+<body>
+
+    <?php
+    $email = $this->session->userdata('email');
+
+    $funkce = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
+    foreach ($funkce as $key) {
+        $oFunkce = $key->funkce;
+    }
+    ?>
+    <div><br>&nbsp</div>
+    <div><br>&nbsp</div>
+    <div class="container">
+        <h4 class="text-center"><?= $kurzy[0]->nazev ?></h4>
+
+        <br>
+
+        <label> <b> &nbsp&nbspPopis: </b><?= $kurzy[0]->popis ?></label> <br>
+        <label> <b> &nbsp&nbspPočet míst: </b> <?= $kurzy[0]->pocet_mist ?></label><br>
+        <label> <b> &nbsp&nbspUčitel/ka: </b> <?= $kurzy[0]->ucitel_jmeno ?> &nbsp<?= $kurzy[0]->ucitel_prijmeni ?></label><br>
+        <label> <b> &nbsp&nbspMísto: </b> <?= $kurzy[0]->misto ?></label><br>
+        <label> <b> &nbsp&nbspCena: </b> <?= $kurzy[0]->cena ?></label><br>
         <?php
-        $email = $this->session->userdata('email');
+        foreach ($kurzy as $key) {
+            $oKurzy = $key->id_hlavni;
+            $oNazev = $key->nazev;
+            $oUzamknuto = $key->uzamknuto;
+        }
 
-        $funkce = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-        foreach ($funkce as $key) {
-            $oFunkce = $key->funkce;
+        foreach ($stejnyKurz as $key) {
+            $oStejnyKurz = $key->kurz;
         }
         ?>
-        <div><br>&nbsp</div>
-        <div><br>&nbsp</div>
 
-        <div class="container">
-            <h4 class="text-center"><?= $kurzy[0]->nazev ?></h4>
+        <label><b>&nbsp&nbspPřihlášení studenti:</b></label>
 
-            <br>
+        <?php foreach ($jmena as $jmeno) { ?>
+            <td><br>&nbsp&nbsp<?= $jmeno->jmeno; ?>&nbsp<?= $jmeno->prijmeni; ?></td>
 
-            <label> <b> &nbsp&nbspPopis: </b><?= $kurzy[0]->popis ?></label> <br>
-            <label> <b> &nbsp&nbspPočet míst: </b> <?= $kurzy[0]->pocet_mist ?></label><br>
-            <label> <b> &nbsp&nbspUčitel/ka: </b> <?= $kurzy[0]->ucitel_jmeno ?> &nbsp<?= $kurzy[0]->ucitel_prijmeni ?></label><br>
-            <label> <b> &nbsp&nbspMísto: </b> <?= $kurzy[0]->misto ?></label><br>
-            <label> <b> &nbsp&nbspCena: </b> <?= $kurzy[0]->cena ?></label><br>
-            <?php
-            foreach ($kurzy as $key) {
-                $oKurzy = $key->id_hlavni;
-            }
-            foreach ($kurzy as $key) {
-                $oNazev = $key->nazev;
-            }
-
-            foreach ($stejnyKurz as $key) {
-                $oStejnyKurz = $key->kurz;
-            }
-            ?> 
-
-            <label><b>&nbsp&nbspPřihlášení studenti:</b></label>
-
-            <?php foreach ($jmena as $jmeno) { ?>
-            <td><br>&nbsp&nbsp<?= $jmeno->jmeno; ?>&nbsp<?= $jmeno->prijmeni; ?></td> 
-
-            <?php } ?>
+        <?php } ?>
 
 
         </div>
-        <?php
-        if ($oFunkce == "student") {
-            if ($oNazev !== $oStejnyKurz) {
-                ?>
+    <?php
+    if ($oFunkce == "student") {
+        if ($oNazev !== $oStejnyKurz) {
+            if ($oUzamknuto == "0") {
+    ?>
 
 
-                <div class="container">
-                    <label>    
-                        <button type="button" class="btn btn-primary" onclick="window.location = '<?php echo site_url("Main/ZapisDat/" . $oKurzy); ?>'">Zapsat se</button>
+            <div class="container">
+                <label>
+                    <button type="button" class="btn btn-primary" onclick="window.location = '<?php echo site_url("Main/ZapisDat/" . $oKurzy); ?>'">Zapsat se</button>
 
-                    </label>     
+                </label>
 
-                </div>
+            </div>
 
-            <?php }
-        } ?>  
+    <?php  }else{
+?>
+        <div class="container">
+            <h5> <b>Uzamknuto - nelze se přihlásit </b> </h5>
+        </div>
+ 
+<?php
+    }}
+    } ?>
 
 
-    </body>
+</body>
+
 </html>

@@ -103,7 +103,7 @@ class Main extends CI_Controller {
                 if ($omezeni >= 1) {
                     
                 } else {
-                    $this->db->query("insert into hlavni (pocet_mist, nazev, popis,ucitel_jmeno, ucitel_prijmeni, ucitel_email, misto, cena) values(?, ?, ?,?,?,?,?,?)", [$n, $e, $p, $oJmeno[0], $oPrijmeni[0], $v, $m, $c]);
+                    $this->db->query("insert into hlavni (pocet_mist, nazev, popis,ucitel_jmeno, ucitel_prijmeni, ucitel_email, misto, cena, uzamknuto) values(?, ?, ?,?,?,?,?,?,?)", [$n, $e, $p, $oJmeno[0], $oPrijmeni[0], $v, $m, $c,'0']);
                     $data['error'] = "<h3>Úspěšně přidáno</h3>";
                 }
 
@@ -117,10 +117,11 @@ class Main extends CI_Controller {
     public function PrehledKurzu() {
         if ($this->session->userdata('currently_logged_in')) {
 
-
-            $data['kurzy'] = $this->db->query('SELECT * FROM hlavni ORDER BY id_hlavni')->result();
-
             $email = $this->session->userdata('email');
+            $data['kurzy'] = $this->db->query('SELECT * FROM hlavni ORDER BY id_hlavni')->result();
+            $data['uzamknuto'] = $this->db->query('SELECT uzamknuto FROM hlavni where ucitel_email="' . $email . '"')->result();
+
+            
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
 
@@ -136,6 +137,7 @@ class Main extends CI_Controller {
         if ($this->session->userdata('currently_logged_in')) {
             $data['kurzy'] = $this->db->query('SELECT * FROM hlavni where id_hlavni =' . $id)->result();
             $email = $this->session->userdata('email');
+
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
             $data['stejnyKurz'] = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
@@ -210,6 +212,7 @@ class Main extends CI_Controller {
             $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['misto'] = $this->db->query('SELECT misto FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['cena'] = $this->db->query('SELECT cena FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['uzamknuto'] = $this->db->query('SELECT uzamknuto FROM hlavni where ucitel_email="' . $email . '"')->result();
 
             $funkce = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $this->load->view('templates/Header', $data);
@@ -261,6 +264,40 @@ class Main extends CI_Controller {
             redirect('Main/Invalid');
         }
     }
+
+    public function uzamknout() {
+        if ($this->session->userdata('currently_logged_in')) {
+            /* header */$email = $this->session->userdata('email');
+
+             /* header */$data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
+             /* header */$data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
+
+             $uzamknuto = $this->db->query('SELECT uzamknuto FROM hlavni where ucitel_email="' . $email . '"')->result();
+
+             $oUzamknuto = array();
+             foreach ($uzamknuto as $row) {
+                 $oUzamknuto[] = $row->uzamknuto;
+             }
+
+             if ($oUzamknuto[0]=="1"){
+
+                $this->db->query("UPDATE hlavni SET uzamknuto='0' where ucitel_email=?", $email);
+             }
+
+             if ($oUzamknuto[0]=="0"){
+               $this->db->query("UPDATE hlavni SET uzamknuto='1' where ucitel_email=?", $email);
+            }
+
+            $this->load->view('templates/Header', $data);
+            $this->load->view('templates/UcitelKurz', $data);
+            $this->load->view('templates/Footer');
+ 
+    } else {
+        redirect('Main/Invalid');
+    }
+
+    }
+
 
     public function invalid() {
         $this->load->view('Invalid');
