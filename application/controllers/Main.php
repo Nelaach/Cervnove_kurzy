@@ -192,9 +192,7 @@ class Main extends CI_Controller {
 
 
 
-            $this->load->view('pages/Detailne_PrehledKurzu', $data);
-            $this->load->view('templates/Header', $data);
-            $this->load->view('templates/Footer');
+           $this->Detailne_PrehledKurzu($id);
         } else {
             redirect('Main/Invalid');
         }
@@ -228,6 +226,7 @@ class Main extends CI_Controller {
     public function zmena() {
         if ($this->session->userdata('currently_logged_in')) {
             $email = $this->session->userdata('email');
+            $data['uzamknuto'] = $this->db->query('SELECT uzamknuto FROM hlavni where ucitel_email="' . $email . '"')->result();
 
 
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
@@ -257,9 +256,8 @@ class Main extends CI_Controller {
             $data['error'] = "<h3>Úspěšně upraveno</h3>";
 
 
-            $this->load->view('templates/Header', $data);
-            $this->load->view('pages/UcitelKurz', $data);
-            $this->load->view('templates/Footer');
+            $this->ucitelKurz();
+
         } else {
             redirect('Main/Invalid');
         }
@@ -282,14 +280,16 @@ class Main extends CI_Controller {
              if ($oUzamknuto[0]=="1"){
 
                 $this->db->query("UPDATE hlavni SET uzamknuto='0' where ucitel_email=?", $email);
+                $this->ucitelKurz();
              }
 
              if ($oUzamknuto[0]=="0"){
                $this->db->query("UPDATE hlavni SET uzamknuto='1' where ucitel_email=?", $email);
+               $this->ucitelKurz();
             }
 
-            $this->load->view('templates/Header', $data);
-            $this->load->view('templates/Footer');
+            
+            
 
     } else {
         redirect('Main/Invalid');

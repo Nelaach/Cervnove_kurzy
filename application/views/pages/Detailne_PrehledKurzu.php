@@ -5,12 +5,18 @@
 
 </head>
 <script>
-    window.onload = function() {
-        if (!window.location.hash) {
-            window.location = window.location + '#loaded';
-            window.location.reload();
-        }
-    };
+//JavaScript function that enables or disables a submit button depending
+//on whether a checkbox has been ticked or not.
+function terms_changed(termsCheckBox){
+    //If the checkbox has been checked
+    if(termsCheckBox.checked){
+        //Set the disabled property to FALSE and enable the button.
+        document.getElementById("submit_button").disabled = false;
+    } else{
+        //Otherwise, disable the submit button.
+        document.getElementById("submit_button").disabled = true;
+    }
+}
 </script>
 
 <style>
@@ -77,13 +83,18 @@
 
 
             <div class="container">
+            <form method="post">
+    <div>
+        <label for="terms_and_conditions">&nbsp&nbspSouhlasím s pokyny</label>
+        <input type="checkbox" id="terms_and_conditions" value="1" onclick="terms_changed(this)" />
+    </div>
                 <label>
-                    <button type="button" class="btn btn-primary" onclick="window.location = '<?php echo site_url("Main/ZapisDat/" . $oKurzy); ?>'">Zapsat se</button>
+                    <button type="button" class="btn btn-primary" id="submit_button" disabled onclick="window.location = '<?php echo site_url("Main/ZapisDat/" . $oKurzy); ?>'">Zapsat se</button>
 
                 </label>
 
             </div>
-
+            </form>
     <?php  }else{
 ?>
         <div class="container">

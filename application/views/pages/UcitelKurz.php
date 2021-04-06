@@ -7,14 +7,8 @@
         <title>Úprava kurzu </title> 
         
     </head>
-<script>
-    window.onload = function() {
-    if(!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
-    }
-};
-</script>
+
+
     <body>
         <div><br>&nbsp</div>
         <div><br>&nbsp</div>
