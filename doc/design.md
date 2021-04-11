@@ -15,5 +15,5 @@ Vývojové prostředí: Netbeans IDE 8.2, Visual Studio Code <br>
 ER-model <br>
 
 ![ER-model](ER-model.png)
-Diagram tříd
+Diagram tříd <br>
 ![class diagram](class_diagram_2.png)
