@@ -14,7 +14,7 @@
 
 
         <div class="container">	
-            <form method="post" action="http://localhost/Kurzy/index.php/main/save">
+            <form method="post" action="<?php echo base_url('main/save') ?>">
                 <h4 style="text-align: center">Vytvoření kurzu</h4>
                 <?php
                 if (isset($error)) {
@@ -68,6 +68,10 @@
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="popis"></textarea>
 
                 </div>
+
+                <div>&nbsp </div>
+            <label>&nbsp&nbsp&nbspUzamknout v &nbsp</label><input type="datetime-local" id="uzavreni" name="uzavreni">
+            <div>&nbsp </div>
 
 
 

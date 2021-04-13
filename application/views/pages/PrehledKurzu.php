@@ -5,7 +5,7 @@
     </head>
     <body>
       
-
+<?php $dnes = date('Y-m-d H:i:s'); ?>
         <div class="container">
             <div><br>&nbsp</div>
             <div><br>&nbsp</div>
@@ -27,7 +27,7 @@
                     <tr>
                         <td>
                             <a href="<?php echo base_url('main/Detailne_PrehledKurzu/' . $kurz->id_hlavni) ?>">
-                            <?= $kurz->nazev; ?><?php if ($kurz->uzamknuto == "1") {?>&nbsp<i class="fas fa-lock"></i><?php } ?>  </td>
+                            <?= $kurz->nazev; ?><?php if ($kurz->uzavreni < $dnes) {?>&nbsp<i class="fas fa-lock"></i><?php } ?>  </td>
                         <td><?= $kurz->pocet_mist; ?></td>
                         <td><?= $kurz->ucitel_jmeno; ?>&nbsp<?= $kurz->ucitel_prijmeni; ?></td> 
                         <td><?= $kurz->misto; ?></td>

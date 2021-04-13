@@ -58,30 +58,69 @@ function terms_changed(termsCheckBox){
         foreach ($kurzy as $key) {
             $oKurzy = $key->id_hlavni;
             $oNazev = $key->nazev;
-            $oUzamknuto = $key->uzamknuto;
+            $oUzavreni = $key->uzavreni;
         }
 
         foreach ($stejnyKurz as $key) {
             $oStejnyKurz = $key->kurz;
         }
+        $casT = str_replace(" ", "T", "$oUzavreni");
+        $uzavrit = strtotime($oUzavreni); //Converted to a PHP date (a second count)
+    
+        $dnes = date('Y-m-d H:i:s');
+        $dnesni = strtotime($dnes); //Converted to a PHP date (a second count)
         ?>
 
         <label><b>&nbsp&nbspPřihlášení studenti:</b></label>
 
         <?php foreach ($jmena as $jmeno) { ?>
-            <td><br>&nbsp&nbsp<?= $jmeno->jmeno; ?>&nbsp<?= $jmeno->prijmeni; ?></td>
+            <td>&nbsp&nbsp<?= $jmeno->jmeno; ?>&nbsp<?= $jmeno->prijmeni; ?>,&nbsp</td>
 
         <?php } ?>
 
 
         </div>
+        <div class="container">
+        <?php
+            if ($oUzavreni > $dnes) {
+
+                $seconds = strtotime($casT) - strtotime($dnes);
+
+                $days = floor($seconds / 86400);
+                $seconds %= 86400;
+
+                $hours = floor($seconds / 3600);
+                $seconds %= 3600;
+
+                $minutes = floor($seconds / 60);
+                $seconds %= 60;
+
+            ?>
+                <label>&nbsp&nbspKurz se uzamkne za:</label>
+            <?php
+                if ($days > 0) {
+                    echo "&nbsp $days d";
+                }
+                if ($hours > 0) {
+                    echo "&nbsp$hours h";
+                }
+                if ($minutes > 0) {
+                    echo "&nbsp$minutes min";
+                }
+                if ($seconds > 0) {
+                    echo "&nbsp$seconds sec";
+                }
+            } else {
+                echo "<label>&nbsp&nbspKurz uzamknutý</label>";
+            }
+            ?>
+            </div>
     <?php
+    
     if ($oFunkce == "student") {
         if ($oNazev !== $oStejnyKurz) {
-            if ($oUzamknuto == "0") {
-    ?>
-
-
+            if ($oUzavreni > $dnes) {
+    ?>          
             <div class="container">
             <form method="post">
     <div>
@@ -95,15 +134,8 @@ function terms_changed(termsCheckBox){
 
             </div>
             </form>
-    <?php  }else{
-?>
-        <div class="container">
-            <h5> <b>Uzamknuto - nelze se přihlásit </b> </h5>
-        </div>
- 
-<?php
-    }}
-    } ?>
+    <?php  }}}
+     ?>
 
 
 </body>

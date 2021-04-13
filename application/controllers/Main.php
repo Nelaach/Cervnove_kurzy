@@ -91,6 +91,9 @@ class Main extends CI_Controller {
             $p = $this->input->post('popis');
             $m = $this->input->post('misto');
             $c = $this->input->post('cena');
+            $d = $this->input->post('uzavreni');
+
+            $uzavreni = str_replace("T", " ", "$d");
 
 
 
@@ -103,7 +106,7 @@ class Main extends CI_Controller {
                 if ($omezeni >= 1) {
                     
                 } else {
-                    $this->db->query("insert into hlavni (pocet_mist, nazev, popis,ucitel_jmeno, ucitel_prijmeni, ucitel_email, misto, cena, uzamknuto) values(?, ?, ?,?,?,?,?,?,?)", [$n, $e, $p, $oJmeno[0], $oPrijmeni[0], $v, $m, $c,'0']);
+                    $this->db->query("insert into hlavni (pocet_mist, nazev, popis,ucitel_jmeno, ucitel_prijmeni, ucitel_email, misto, cena, uzavreni) values(?, ?, ?,?,?,?,?,?,?)", [$n, $e, $p, $oJmeno[0], $oPrijmeni[0], $v, $m, $c, $uzavreni]);
                     $data['error'] = "<h3>Úspěšně přidáno</h3>";
                 }
 
@@ -119,7 +122,7 @@ class Main extends CI_Controller {
 
             $email = $this->session->userdata('email');
             $data['kurzy'] = $this->db->query('SELECT * FROM hlavni ORDER BY id_hlavni')->result();
-            $data['uzamknuto'] = $this->db->query('SELECT uzamknuto FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['uzavreni'] = $this->db->query('SELECT uzavreni FROM hlavni where ucitel_email="' . $email . '"')->result();
 
             
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
@@ -205,12 +208,12 @@ class Main extends CI_Controller {
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
 
+            $data['uzavreni'] = $this->db->query('SELECT uzavreni FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['nazev'] = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['popis'] = $this->db->query('SELECT popis FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['misto'] = $this->db->query('SELECT misto FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['cena'] = $this->db->query('SELECT cena FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['uzamknuto'] = $this->db->query('SELECT uzamknuto FROM hlavni where ucitel_email="' . $email . '"')->result();
 
             $funkce = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
             $this->load->view('templates/Header', $data);
@@ -226,8 +229,6 @@ class Main extends CI_Controller {
     public function zmena() {
         if ($this->session->userdata('currently_logged_in')) {
             $email = $this->session->userdata('email');
-            $data['uzamknuto'] = $this->db->query('SELECT uzamknuto FROM hlavni where ucitel_email="' . $email . '"')->result();
-
 
             $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
             $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
@@ -243,7 +244,9 @@ class Main extends CI_Controller {
             $p = $this->input->post('popis');
             $m = $this->input->post('misto');
             $c = $this->input->post('cena');
+            $d = $this->input->post('uzavreni');
 
+            $uzavreni = str_replace("T", " ", "$d");
 
             $oNazev = array();
             foreach ($nazev as $row) {
@@ -251,7 +254,7 @@ class Main extends CI_Controller {
             }
 
 
-            $this->db->query("UPDATE hlavni SET nazev='" . $e . "', popis='" . $p . "', misto='" . $m . "', cena='" . $c . "' where ucitel_email=?", $email);
+            $this->db->query("UPDATE hlavni SET nazev='" . $e . "', popis='" . $p . "', misto='" . $m . "', cena='" . $c . "', uzavreni='" . $uzavreni . "' where ucitel_email=?", $email);
             $this->db->query("UPDATE prihlasovani SET kurz='" . $e . "' where kurz='".$oNazev[0]."'");
             $data['error'] = "<h3>Úspěšně upraveno</h3>";
 
@@ -261,40 +264,6 @@ class Main extends CI_Controller {
         } else {
             redirect('Main/Invalid');
         }
-    }
-
-    public function uzamknout() {
-        if ($this->session->userdata('currently_logged_in')) {
-            /* header */$email = $this->session->userdata('email');
-
-             /* header */$data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-             /* header */$data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-
-             $uzamknuto = $this->db->query('SELECT uzamknuto FROM hlavni where ucitel_email="' . $email . '"')->result();
-
-             $oUzamknuto = array();
-             foreach ($uzamknuto as $row) {
-                 $oUzamknuto[] = $row->uzamknuto;
-             }
-
-             if ($oUzamknuto[0]=="1"){
-
-                $this->db->query("UPDATE hlavni SET uzamknuto='0' where ucitel_email=?", $email);
-                $this->ucitelKurz();
-             }
-
-             if ($oUzamknuto[0]=="0"){
-               $this->db->query("UPDATE hlavni SET uzamknuto='1' where ucitel_email=?", $email);
-               $this->ucitelKurz();
-            }
-
-            
-            
-
-    } else {
-        redirect('Main/Invalid');
-    }
-
     }
 
 

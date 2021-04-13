@@ -20,14 +20,23 @@
 
     <body>
         <?php
+
         $email = $this->session->userdata('email');
         foreach ($ucitel as $key) {
             $oUcitel = $key->funkce;
         }
+        $student_kurz = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
+        foreach ($student_kurz as $key) {
+            $oKurz = $key->kurz;
+        }
+        $id = $this->db->query('SELECT id_hlavni FROM hlavni where nazev="' . $oKurz . '"')->result();
+        foreach ($id as $key) {
+            $oId = $key->id_hlavni;
+        }
+
         ?>
 
         <nav class="mb-1 navbar navbar-expand-lg navbar-dark orange lighten-1 fixed-top">
-
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,9 +56,13 @@
 
                         <?php } ?>
                     <?php } ?>
-
-
                     <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/PrehledKurzu'); ?>">Přehled Kurzů</a></li>
+                    
+                    <?php if (!is_null($oKurz)) { ?> 
+                            <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/Detailne_PrehledKurzu/'.$oId); ?>"><?= $oKurz[0] ?></a></li>                
+
+                        <?php } ?>
+ 
 
                 </ul>
 
