@@ -33,6 +33,7 @@ Našim plánem na druhé pololetí, je pokračovat v rozpracovaném projektu.
 
 ## Dokumentace
 [dokumentace](/doc) <br>
+[technická dokumentace](/doc/nova_dokumentace.doc) <br>
 
 ## Webová stránka
 http://kurzy.4fan.cz/ <br>
