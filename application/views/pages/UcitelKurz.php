@@ -13,21 +13,14 @@
 
 
     <?php
-    foreach ($nazev as $key) {
+    foreach ($kurz as $key) {
         $oNazev = $key->nazev;
-    }
-    foreach ($popis as $key) {
         $oPopis = $key->popis;
-    }
-    foreach ($misto as $key) {
         $oMisto = $key->misto;
-    }
-    foreach ($cena as $key) {
         $oCena = $key->cena;
-    }
-    foreach ($uzavreni as $key) {
         $oUzavreni = $key->uzavreni;
     }
+
     $casT = str_replace(" ", "T", "$oUzavreni");
     $uzavrit = strtotime($oUzavreni); //Converted to a PHP date (a second count)
 
@@ -62,7 +55,7 @@
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         </div>
-                        <input type="number" min="5" max="50" class="form-control" value="<?= $pocet[0]->pocet_mist ?>" readonly name="pocet_mist">
+                        <input type="number" min="5" max="50" class="form-control" value="<?= $kurz[0]->pocet_mist ?>" readonly name="pocet_mist">
                     </div>
                 </div>
             </div>

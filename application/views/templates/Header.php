@@ -20,19 +20,15 @@
 
     <body>
         <?php
-
         $email = $this->session->userdata('email');
-        foreach ($ucitel as $key) {
-            $oUcitel = $key->funkce;
+            $ucitel_kurz = $this->db->query('SELECT kurz.nazev FROM kurz INNER JOIN uzivatel ON kurz_idKurz = idKurz where uzivatel.funkce = "ucitel" and uzivatel.email="' . $email . '"')->result();
+            $funkce = $this->db->query('SELECT funkce FROM uzivatel where email="' . $email . '"')->result();
+            $student_kurz = $this->db->query('SELECT kurz.nazev as nazev, kurz.idKurz as idKurz FROM kurz INNER JOIN uzivatel ON kurz_idKurz = idKurz where uzivatel.funkce = "student" and uzivatel.email="' . $email . '"')->result();
+        
+        foreach ($funkce as $key) {
+            $oFunkce = $key->funkce;
         }
-        $student_kurz = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
-        foreach ($student_kurz as $key) {
-            $oKurz = $key->kurz;
-        }
-        $id = $this->db->query('SELECT id_hlavni FROM hlavni where nazev="' . $oKurz . '"')->result();
-        foreach ($id as $key) {
-            $oId = $key->id_hlavni;
-        }
+
 
         ?>
 
@@ -44,24 +40,26 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
 
-                    <?php if ($oUcitel == "ucitel") { ?> 
-                        <?php if (!$shoda) { ?> 
+                    <?php if ($oFunkce == "ucitel") { ?> 
+                        <?php if (!$ucitel_kurz) { ?> 
                             <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/NovyKurz'); ?>">Nový kurz</a></li>                
                         <?php } ?>
                     <?php } ?>
 
-                    <?php foreach ($shoda as $shod) { ?>
-                        <?php if ($shoda) { ?> 
-                            <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/UcitelKurz'); ?>"><?= $shod->nazev ?></a></li>                
+                    <?php foreach ($ucitel_kurz as $kurz) { ?>
+                        <?php if ($kurz) { ?> 
+                            <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/UcitelKurz'); ?>"><?= $kurz->nazev ?></a></li>                
 
                         <?php } ?>
                     <?php } ?>
                     <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/PrehledKurzu'); ?>">Přehled Kurzů</a></li>
                     
-                    <?php if (!is_null($oKurz)) { ?> 
-                            <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/Detailne_PrehledKurzu/'.$oId); ?>"><?= $oKurz[0] ?></a></li>                
+                    <?php if ($oFunkce == "student") { ?> 
+                        <?php foreach ($ucitel_kurz as $kurz) { ?>
+                    <?php if (!is_null($student_kurz)) { ?> 
+                            <li class="nav-item"> <a class="nav-link" <a href="<?php echo base_url('main/Detailne_PrehledKurzu/'.$kurz->idKurz); ?>"><?= $kurz->nazev ?></a></li>                
 
-                        <?php } ?>
+                        <?php } }}?>
  
 
                 </ul>

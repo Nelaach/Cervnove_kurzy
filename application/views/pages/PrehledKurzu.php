@@ -45,8 +45,7 @@ $(document).ready(function() {
 </head>
 
 <body>
-
-    <?php $dnes = date('Y-m-d H:i:s'); ?>
+        <?php $dnes = date('Y-m-d H:i:s'); ?>
     <div class="container">
         <div><br>&nbsp</div>
         <div><br>&nbsp</div>
@@ -66,7 +65,7 @@ $(document).ready(function() {
             <?php foreach ($kurzy as $kurz) { ?>
                 <tr>
                     <td> 
-                        <a style="color: blue;" class="modra" href="<?php echo base_url('main/Detailne_PrehledKurzu/' . $kurz->id_hlavni) ?>">
+                        <a style="color: blue;" class="modra" href="<?php echo base_url('main/Detailne_PrehledKurzu/' . $kurz->idKurz) ?>">
                             <?= $kurz->nazev; ?><?php if ($kurz->uzavreni < $dnes) { ?>&nbsp<i class="fas fa-lock"></i><?php } ?>
                     </td>
                     <td><?= $kurz->pocet_mist; ?></td>

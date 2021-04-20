@@ -37,7 +37,7 @@ function terms_changed(termsCheckBox){
     <?php
     $email = $this->session->userdata('email');
 
-    $funkce = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
+    $funkce = $this->db->query('SELECT funkce FROM uzivatel where email="' . $email . '"')->result();
     foreach ($funkce as $key) {
         $oFunkce = $key->funkce;
     }
@@ -56,14 +56,17 @@ function terms_changed(termsCheckBox){
         <label> <b> &nbsp&nbspCena: </b> <?= $kurzy[0]->cena ?></label><br>
         <?php
         foreach ($kurzy as $key) {
-            $oKurzy = $key->id_hlavni;
+            $oKurzy = $key->idKurz;
             $oNazev = $key->nazev;
             $oUzavreni = $key->uzavreni;
         }
+        $email = $this->session->userdata('email');
 
-        foreach ($stejnyKurz as $key) {
-            $oStejnyKurz = $key->kurz;
+if (!is_null($prihlaseny_kurz)){
+        foreach ($prihlaseny_kurz as $key) {
+            $oStejnyKurz = $key->nazev;
         }
+    }
         $casT = str_replace(" ", "T", "$oUzavreni");
         $uzavrit = strtotime($oUzavreni); //Converted to a PHP date (a second count)
     
@@ -73,7 +76,7 @@ function terms_changed(termsCheckBox){
 
         <label><b>&nbsp&nbspPřihlášení studenti:</b></label>
 
-        <?php foreach ($jmena as $jmeno) { ?>
+        <?php foreach ($prihlaseni as $jmeno) { ?>
             <td>&nbsp&nbsp<?= $jmeno->jmeno; ?>&nbsp<?= $jmeno->prijmeni; ?>,&nbsp</td>
 
         <?php } ?>
@@ -128,7 +131,7 @@ function terms_changed(termsCheckBox){
         <input type="checkbox" id="terms_and_conditions" value="1" onclick="terms_changed(this)" />
     </div>
                 <label>
-                    <button type="button" class="btn btn-primary" id="submit_button" disabled onclick="window.location = '<?php echo site_url("Main/ZapisDat/" . $oKurzy); ?>'">Zapsat se</button>
+                    <button type="button" class="btn btn-primary" id="submit_button" disabled onclick="window.location = '<?php echo site_url("Main/ZapisKurzu/" . $oKurzy); ?>'">Zapsat se</button>
 
                 </label>
 

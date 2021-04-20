@@ -6,7 +6,7 @@ class Login_model extends CI_Model {
   
         $this->db->where('email', $this->input->post('email'));  
         $this->db->where('heslo', $this->input->post('password'));  
-        $query = $this->db->get('prihlasovani');  
+        $query = $this->db->get('uzivatel');  
   
         if ($query->num_rows() == 1)  
         {  

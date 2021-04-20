@@ -1,19 +1,28 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class Main extends CI_Controller
+{
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('kurzy');
+    }
 
-    public function index() {
+    public function index()
+    {
         $this->login();
     }
 
-    public function login() {
+    public function login()
+    {
         $this->load->view('Login_view');
         $this->load->view('templates/Footer');
     }
 
-    public function data() {
+    public function data()
+    {
         if ($this->session->userdata('currently_logged_in')) {
             $this->prehledKurzu();
         } else {
@@ -21,114 +30,54 @@ class Main extends CI_Controller {
         }
     }
 
-    public function NovyKurz() {
+    public function NovyKurz()
+    {
         if ($this->session->userdata('currently_logged_in')) {
 
-
-            $email = $this->session->userdata('email');
-            $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-
-            $funkce = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-            $oFunkce = array();
-            foreach ($funkce as $row) {
-                $oFunkce[] = $row->funkce;
-            }
-            $vytvorenyKurz = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $this->load->view('templates/Header', $data);
-
-            if (!$vytvorenyKurz) {
-                if ($oFunkce[0] == "ucitel") {
-                    
-                    $this->load->view('pages/NovyKurz', $data);
-                    $this->load->view('templates/Footer');
-                }
-            }
+            $this->load->view('templates/Header');
+            $this->load->view('pages/NovyKurz');
         } else {
             redirect('Main/Invalid');
         }
     }
 
-    public function save() {
+    public function save()
+    {
         if ($this->session->userdata('currently_logged_in')) {
 
-
-            $v = $this->session->userdata('email');
-            $prijmeni = $this->db->query('select prijmeni from prihlasovani where email ="' . $v . '"')->result();
-
-            $jmeno = $this->db->query('select jmeno from prihlasovani where email ="' . $v . '"')->result();
             $email = $this->session->userdata('email');
 
+            $this->load->view('templates/header');
 
-            $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-            $data['nazev'] = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['popis'] = $this->db->query('SELECT popis FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['misto'] = $this->db->query('SELECT misto FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['cena'] = $this->db->query('SELECT cena FROM hlavni where ucitel_email="' . $email . '"')->result();
-
-            $vytvorenyKurz = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['kurzy'] = $this->db->query('SELECT * FROM hlavni ORDER BY id_hlavni')->result();
-
-
-
-
-
-            $oJmeno = array();
-            foreach ($jmeno as $row) {
-                $oJmeno[] = $row->jmeno;
-            }
-
-            $oPrijmeni = array();
-            foreach ($prijmeni as $row) {
-                $oPrijmeni[] = $row->prijmeni;
-            }
-
-
-            $n = $this->input->post('pocet_mist');
-            $e = $this->input->post('nazev');
-            $p = $this->input->post('popis');
-            $m = $this->input->post('misto');
-            $c = $this->input->post('cena');
-            $d = $this->input->post('uzavreni');
-
-            $uzavreni = str_replace("T", " ", "$d");
-
-
-
-            $kurz = $this->db->query("select * from hlavni where ucitel_email=?", [$v]);
-            $omezeni = $kurz->num_rows();
-            $this->load->view('templates/header', $data);
-            if (!$vytvorenyKurz) {
-
-
-                if ($omezeni >= 1) {
-                    
-                } else {
-                    $this->db->query("insert into hlavni (pocet_mist, nazev, popis,ucitel_jmeno, ucitel_prijmeni, ucitel_email, misto, cena, uzavreni) values(?, ?, ?,?,?,?,?,?,?)", [$n, $e, $p, $oJmeno[0], $oPrijmeni[0], $v, $m, $c, $uzavreni]);
-                    $data['error'] = "<h3>Úspěšně přidáno</h3>";
-                }
-
+            if ($this->kurzy->existujici_kurz() == false) {
+                $this->kurzy->insert_entry($email);
+                $data['error'] = "<h3>Úspěšně přidáno</h3>";
                 $this->prehledKurzu();
+            } else {
+?>
+                <style>
+                    .center {
+                        text-align: center;
+                        padding-top: 60px;
+                    }
+                </style>
+
+<?php
+                $this->novyKurz();
+                echo '<h3 class="center">Tento název již existuje, vyberte si, prosím, jiný.</h3>';
             }
         } else {
             redirect('Main/invalid');
         }
     }
 
-    public function PrehledKurzu() {
+    public function PrehledKurzu()
+    {
         if ($this->session->userdata('currently_logged_in')) {
 
-            $email = $this->session->userdata('email');
-            $data['kurzy'] = $this->db->query('SELECT * FROM hlavni ORDER BY id_hlavni')->result();
-            $data['uzavreni'] = $this->db->query('SELECT uzavreni FROM hlavni where ucitel_email="' . $email . '"')->result();
+            $data['kurzy'] = $this->kurzy->get_kurzy();
 
-            
-            $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-
-            $this->load->view('templates/Header', $data);
+            $this->load->view('templates/Header');
             $this->load->view('pages/PrehledKurzu', $data);
             $this->load->view('templates/Footer');
         } else {
@@ -136,88 +85,45 @@ class Main extends CI_Controller {
         }
     }
 
-    public function Detailne_PrehledKurzu($id) {
+    public function Detailne_PrehledKurzu($id)
+    {
         if ($this->session->userdata('currently_logged_in')) {
-            $data['kurzy'] = $this->db->query('SELECT * FROM hlavni where id_hlavni =' . $id)->result();
             $email = $this->session->userdata('email');
 
-            $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-            $data['stejnyKurz'] = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
-            $stejnyKurz = $this->db->query('SELECT nazev FROM hlavni where id_hlavni =' . $id)->result();
+            $data['kurzy'] = $this->kurzy->get_kurz($id);
+            $data['prihlaseny_kurz'] = $this->kurzy->prihlaseny_kurz($email);
+            $data['prihlaseni'] = $this->kurzy->prihlaseni_studenti_kurz($id);
 
-            
-            $oStejnyKurz = array();
-            foreach ($stejnyKurz as $row) {
-                $oStejnyKurz[] = $row->nazev;
-            }
-
-            $data['jmena'] = $this->db->query('SELECT jmeno, prijmeni FROM prihlasovani where kurz="' . $oStejnyKurz[0] . '"')->result();
+            $this->load->view('templates/Header');
             $this->load->view('pages/Detailne_PrehledKurzu', $data);
-            $this->load->view('templates/Header', $data);
             $this->load->view('templates/Footer');
         } else {
             redirect('Main/Invalid');
         }
     }
 
-    public function ZapisDat($id) {
+    public function ZapisKurzu($id)
+    {
         if ($this->session->userdata('currently_logged_in')) {
-            $data['kurzy'] = $this->db->query('SELECT * FROM hlavni where id_hlavni =' . $id)->result();
             $email = $this->session->userdata('email');
-            $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-            $data['stejnyKurz'] = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
-            $stejnyKurz = $this->db->query('SELECT kurz FROM prihlasovani where email="' . $email . '"')->result();
+            $data['prihlaseni'] = $this->kurzy->zapis_do_kurzu($email, $id);
 
-            $oStejnyKurz = array();
-            foreach ($stejnyKurz as $row) {
-                $oStejnyKurz[] = $row->kurz;
-            }
-        $funkce = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-        foreach ($funkce as $key) {
-            $oFunkce = $key->funkce;
-        }
-            
-            if ($oFunkce=="student"){
-            $data['jmena'] = $this->db->query('SELECT jmeno, prijmeni FROM prihlasovani where kurz="' . $oStejnyKurz[0] . '"')->result();
-            $kurzy = $this->db->query('SELECT nazev FROM hlavni where id_hlavni =' . $id)->result();
-
-            }
-            $oKurzy = array();
-            foreach ($kurzy as $row) {
-                $oKurzy[] = $row->nazev;
-            }
-
-
-
-            $this->db->query("UPDATE prihlasovani SET kurz='" . $oKurzy[0] . "' where email='" . $email . "'");
-
-
-
-           $this->Detailne_PrehledKurzu($id);
+            $this->Detailne_PrehledKurzu($id);
         } else {
             redirect('Main/Invalid');
         }
     }
 
-    public function UcitelKurz() {
+    public function UcitelKurz()
+    {
         if ($this->session->userdata('currently_logged_in')) {
 
             $email = $this->session->userdata('email');
-            $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
+            $this->load->view('templates/Header');
 
-            $data['uzavreni'] = $this->db->query('SELECT uzavreni FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['nazev'] = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['popis'] = $this->db->query('SELECT popis FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['misto'] = $this->db->query('SELECT misto FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['cena'] = $this->db->query('SELECT cena FROM hlavni where ucitel_email="' . $email . '"')->result();
+            if ($this->kurzy->existujici_ucitel_kurz($email) == true) {
+                $data['kurz'] = $this->kurzy->ucitel_kurz($email);
 
-            $funkce = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $this->load->view('templates/Header', $data);
-            if ($funkce) {
                 $this->load->view('pages/UcitelKurz', $data);
                 $this->load->view('templates/Footer');
             }
@@ -226,52 +132,29 @@ class Main extends CI_Controller {
         }
     }
 
-    public function zmena() {
+    public function zmena()
+    {
         if ($this->session->userdata('currently_logged_in')) {
             $email = $this->session->userdata('email');
 
-            $data['shoda'] = $this->db->query('SELECT * FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['ucitel'] = $this->db->query('SELECT funkce FROM prihlasovani where email="' . $email . '"')->result();
-
-            $data['nazev'] = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $nazev = $this->db->query('SELECT nazev FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['popis'] = $this->db->query('SELECT popis FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['pocet'] = $this->db->query('SELECT pocet_mist FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['misto'] = $this->db->query('SELECT misto FROM hlavni where ucitel_email="' . $email . '"')->result();
-            $data['cena'] = $this->db->query('SELECT cena FROM hlavni where ucitel_email="' . $email . '"')->result();
-
-            $e = $this->input->post('nazev');
-            $p = $this->input->post('popis');
-            $m = $this->input->post('misto');
-            $c = $this->input->post('cena');
-            $d = $this->input->post('uzavreni');
-
-            $uzavreni = str_replace("T", " ", "$d");
-
-            $oNazev = array();
-            foreach ($nazev as $row) {
-                $oNazev[] = $row->nazev;
-            }
-
-
-            $this->db->query("UPDATE hlavni SET nazev='" . $e . "', popis='" . $p . "', misto='" . $m . "', cena='" . $c . "', uzavreni='" . $uzavreni . "' where ucitel_email=?", $email);
-            $this->db->query("UPDATE prihlasovani SET kurz='" . $e . "' where kurz='".$oNazev[0]."'");
+            $this->kurzy->update_entry($email);
             $data['error'] = "<h3>Úspěšně upraveno</h3>";
 
 
             $this->ucitelKurz();
-
         } else {
             redirect('Main/Invalid');
         }
     }
 
 
-    public function invalid() {
+    public function invalid()
+    {
         $this->load->view('Invalid');
     }
 
-    public function login_action() {
+    public function login_action()
+    {
         $this->load->helper('security');
         $this->load->library('form_validation');
 
@@ -292,7 +175,8 @@ class Main extends CI_Controller {
         }
     }
 
-    public function validation() {
+    public function validation()
+    {
         $this->load->model('login_model');
 
         if ($this->login_model->log_in_correctly()) {
@@ -304,9 +188,9 @@ class Main extends CI_Controller {
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         $this->session->sess_destroy();
         redirect('Main/Login');
     }
-
 }
