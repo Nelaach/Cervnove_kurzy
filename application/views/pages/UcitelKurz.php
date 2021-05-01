@@ -3,13 +3,54 @@
 
 <head>
     <title>Úprava kurzu </title>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css rel=stylesheet>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap4.min.css rel=stylesheet>
 
+    <style>
+        table.dataTable thead .sorting:after,
+        table.dataTable thead .sorting:before,
+        table.dataTable thead .sorting_asc:after,
+        table.dataTable thead .sorting_asc:before,
+        table.dataTable thead .sorting_asc_disabled:after,
+        table.dataTable thead .sorting_asc_disabled:before,
+        table.dataTable thead .sorting_desc:after,
+        table.dataTable thead .sorting_desc:before,
+        table.dataTable thead .sorting_desc_disabled:after,
+        table.dataTable thead .sorting_desc_disabled:before {
+            bottom: .5em;
+        }
+
+        .sOrange {
+            color: orange;
+
+        }
+    </style>
+    <script>
+        // https://datatables.net/examples/basic_init/filter_only.html
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": false,
+                "searching": true,
+                "language": {
+                    "search": "Vyhledat podle:",
+                    "paginate": {
+                        "first": "první",
+                        "last": "poslední",
+                        "next": "další",
+                        "previous": "předchozí"
+                    },
+
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
     <div><br>&nbsp</div>
     <div><br>&nbsp</div>
-
 
 
     <?php
@@ -130,6 +171,35 @@
     </div>
 
 
+    <div class="container">
+        <table cellspacing=0 class="table table-bordered table-hover table-inverse" id=example width=100%>
+            <thead>
+                <tr>
+                    <td> <b> Jméno </b> </td>
+                    <td> <b> Přijmení </b> </td>
+                    <td> <b> Kurz </b> </td>
+                    <td></td>
+                </tr>
+            </thead>
+            <?php foreach ($studenti as $student) { ?>
+                <tr>
+                    <td><?= $student->jmeno; ?></td>
+                    <td><?= $student->prijmeni; ?></td>
+                    <td><?= $student->nazev; ?></td>
+                    <td> 
+                    <?php if ($oNazev != $student->nazev) {?>
+                    <a style="color: blue;" class="modra" href="<?php echo base_url('main/pridatStudenta/'.$student->idUzivatel) ?>">Přidat do svého kurzu
+                    <?php } 
+                       else { echo "Student je v kurzu"; } ?>
+                    </td>
+                </tr>
+            <?php } ?>
+
+        </table>
+        <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js></script>
+        <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/jquery.dataTables.min.js></script>
+        <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/dataTables.bootstrap4.min.js></script>
+    </div>
 
 
 </body>

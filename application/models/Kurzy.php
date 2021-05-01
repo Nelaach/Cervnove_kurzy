@@ -11,7 +11,7 @@ class Kurzy extends CI_Model
                 $this->db->join('uzivatel', 'kurz_idKurz = idKurz');
                 $query = $this->db->get();
                 return $query->result();
-        }
+        } 
 
         public function get_kurz($id)
         {
@@ -19,6 +19,14 @@ class Kurzy extends CI_Model
                 $this->db->where('idKurz', $id);
                 $this->db->from('kurz');
                 $this->db->join('uzivatel', 'kurz_idKurz = idKurz');
+                $query = $this->db->get();
+                return $query->result();
+        }
+        public function funkce($email)
+        {
+                $this->db->select('funkce');
+                $this->db->where('email', $email);
+                $this->db->from('uzivatel');
                 $query = $this->db->get();
                 return $query->result();
         }
@@ -104,8 +112,27 @@ class Kurzy extends CI_Model
                 if ($ucitel) {
                         return true;
                 }
+ }
+ public function studenti () { 
+        $this->db->select('idUzivatel, jmeno, prijmeni, kurz.nazev as nazev');
+        $this->db->from('uzivatel');
+        $this->db->where('funkce', 'student');
+        $this->db->join('kurz', 'kurz_idKurz = idKurz', 'left');
+        $query = $this->db->get();
+        return $query->result();
+}
+public function smazat_kurz ($id) { 
+        $this->db->query("delete from kurz where idKurz=$id");
+        $this->db->query("update uzivatel set kurz_idKurz = NULL where kurz_idKurz=$id ");
+}
+public function pridat_studenta_do_kurzu ($idUzivatel, $email) { 
+        $this->kurzy->ucitel_kurz($email);
+        $kurz =  $this->db->query('SELECT kurz_idKurz FROM uzivatel INNER JOIN kurz ON kurz_idKurz = kurz.idKurz where uzivatel.funkce = "ucitel" and email="' . $email . '"')->result();
+        foreach ($kurz as $key) {
+                $oIdKurz = $key->kurz_idKurz;
+            }
+        
+        $this->db->query("UPDATE uzivatel SET kurz_idKurz='$oIdKurz' where idUzivatel='" . $idUzivatel . "'");
 
-
-
-        }
+}
 }

@@ -62,7 +62,7 @@ class Main extends CI_Controller
                     }
                 </style>
 
-<?php
+            <?php
                 $this->novyKurz();
                 echo '<h3 class="center">Tento název již existuje, vyberte si, prosím, jiný.</h3>';
             }
@@ -75,7 +75,9 @@ class Main extends CI_Controller
     {
         if ($this->session->userdata('currently_logged_in')) {
 
+            $email = $this->session->userdata('email');
             $data['kurzy'] = $this->kurzy->get_kurzy();
+            $data['funkce'] = $this->kurzy->funkce($email);
 
             $this->load->view('templates/Header');
             $this->load->view('pages/PrehledKurzu', $data);
@@ -123,6 +125,7 @@ class Main extends CI_Controller
 
             if ($this->kurzy->existujici_ucitel_kurz($email) == true) {
                 $data['kurz'] = $this->kurzy->ucitel_kurz($email);
+                $data['studenti'] = $this->kurzy->studenti();
 
                 $this->load->view('pages/UcitelKurz', $data);
                 $this->load->view('templates/Footer');
@@ -142,6 +145,38 @@ class Main extends CI_Controller
 
 
             $this->ucitelKurz();
+        } else {
+            redirect('Main/Invalid');
+        }
+    }
+
+    public function pridatStudenta($idUzivatel)
+    {
+        if ($this->session->userdata('currently_logged_in')) {
+
+            $email = $this->session->userdata('email');
+            $this->kurzy->pridat_studenta_do_kurzu($idUzivatel, $email);
+
+            $data['error'] = "<h3>Úspěšně přidán</h3>";
+
+            $this->ucitelKurz();
+        } else {
+            redirect('Main/Invalid');
+        }
+    }
+    public function smazatKurz($id)
+    {
+        if ($this->session->userdata('currently_logged_in')) {
+
+            $this->kurzy->smazat_kurz($id);
+
+            $this->prehledKurzu();
+            ?>
+            <script>
+                alert("Kurz byl úspěšně smazán");
+            </script>
+
+<?php
         } else {
             redirect('Main/Invalid');
         }
