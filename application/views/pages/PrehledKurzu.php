@@ -47,7 +47,9 @@
         $oFunkce = $key->funkce;
     }
     ?>
+    <?php
 
+    ?>
     <?php $dnes = date('Y-m-d H:i:s'); ?>
     <div class="container">
         <div><br>&nbsp</div>
@@ -63,9 +65,9 @@
                         <td> <b> Učitel/ka </b> </td>
                         <td> <b> Místo </b> </td>
                         <td> <b> Cena </b> </td>
-                        <?php if ($funkce = "admin") {
+                        <?php if ($oFunkce == "admin") {
                             echo "<td> <b> Smazat </b> </td>";
-                        } 
+                        }
                         ?>
                     </tr>
                 </thead>
@@ -75,16 +77,23 @@
                             <a style="color: blue;" class="modra" href="<?php echo base_url('main/Detailne_PrehledKurzu/' . $kurz->idKurz) ?>">
                                 <?= $kurz->nazev; ?><?php if ($kurz->uzavreni < $dnes) { ?>&nbsp<i class="fas fa-lock"></i><?php } ?>
                         </td>
-                        <td><?= $kurz->pocet_mist; ?></td>
+                        <?php 
+                        $query = $this->db->query('select * from uzivatel where kurz_idKurz = ' . $kurz->idKurz . ' and funkce = "student"');
+                        $prihlaseni_studenti = $query->num_rows(); 
+                        ?>
+                        <td><?php echo $prihlaseni_studenti;
+                            echo "/";
+                            echo $kurz->pocet_mist; ?></td>
                         <td><?= $kurz->ucitel_jmeno; ?>&nbsp<?= $kurz->ucitel_prijmeni; ?></td>
                         <td><?= $kurz->misto; ?></td>
                         <td><?= $kurz->cena; ?></td>
-                        <?php if ($funkce = "admin") { ?>
-                           <td> 
-                           <a style="color: red;" href="<?php echo base_url('main/smazatKurz/' . $kurz->idKurz) ?>">
-                           <i class="fas fa-times"></i> </td>
+                        <?php if ($oFunkce == "admin") { ?>
+                            <td>
+                                <a style="color: red;" href="<?php echo base_url('main/smazatKurz/' . $kurz->idKurz) ?>">
+                                    <i class="fas fa-times"></i>
+                            </td>
                         <?php } ?>
-                        
+
                     </tr>
                 <?php } ?>
 
