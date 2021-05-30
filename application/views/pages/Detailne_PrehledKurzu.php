@@ -36,13 +36,18 @@
 
     <?php
     $email = $this->session->userdata('email');
-
     $funkce = $this->db->query('SELECT funkce FROM uzivatel where email="' . $email . '"')->result();
     foreach ($funkce as $key) {
         $oFunkce = $key->funkce;
     }
     $query = $this->db->query('select * from uzivatel where kurz_idKurz = ' . $kurzy[0]->idKurz . ' and funkce = "student"');
+    $prihlaseny_fronta = $this->db->query('SELECT fronta_idKurz FROM uzivatel where email="' . $email . '"')->result();
+    foreach ($prihlaseny_fronta as $key) {
+        $oFronta = $key->fronta_idKurz;
+    }
     $prihlaseni_studenti = $query->num_rows();
+    $je_fronta = $this->db->query('SELECT fronta_idKurz FROM uzivatel where fronta_idKurz="' . $kurzy[0]->idKurz . '"')->result();
+
     ?>
     <div><br>&nbsp</div>
     <div><br>&nbsp</div>
@@ -83,8 +88,18 @@
         <?php foreach ($prihlaseni as $jmeno) { ?>
             <td>&nbsp&nbsp<?= $jmeno->jmeno; ?>&nbsp<?= $jmeno->prijmeni; ?>,&nbsp</td>
 
-        <?php } ?>
+        <?php }
 
+        ?>
+
+        <br><label><b>&nbsp&nbspStudenti ve frontě:</b></label>
+
+        <?php foreach ($fronta as $jmeno) { ?>
+            <td>&nbsp&nbsp<?= $jmeno->jmeno; ?>&nbsp<?= $jmeno->prijmeni; ?>,&nbsp</td>
+
+        <?php }
+
+        ?>
 
     </div>
     <div class="container">
@@ -123,11 +138,18 @@
         ?>
     </div>
     <?php
-
+    if ($je_fronta) {
+        if ($prihlaseni_studenti < $kurzy[0]->pocet_mist) {
+            $pocet_mista = $kurzy[0]->pocet_mist - $prihlaseni_studenti;
+            $this->db->query('UPDATE uzivatel SET kurz_idKurz = ' . $kurzy[0]->idKurz . ', fronta_idKurz="null" WHERE fronta_idkurz = '. $kurzy[0]->idKurz .' ORDER BY idUzivatel LIMIT ' . $pocet_mista . '');
+            ?> <script>window.location.reload()</script><?php
+        }
+    }
     if ($oFunkce == "student") {
         if ($oNazev !== $oStejnyKurz) {
             if ($oUzavreni > $dnes) {
                 if ($prihlaseni_studenti < $kurzy[0]->pocet_mist) {
+
     ?>
                     <div class="container">
                         <form method="post">
@@ -136,17 +158,33 @@
                                 <input type="checkbox" id="terms_and_conditions" value="1" onclick="terms_changed(this)" />
                             </div>
                             <label>
-                                <button type="button" class="btn btn-primary" id="submit_button" disabled onclick="window.location = '<?php echo site_url("Main/ZapisKurzu/" . $oKurzy); ?>'">Zapsat se</button>
+                                <button type="button" class="btn btn-primary" id="submit_button" disabled onclick="window.location = '<?php echo site_url("Main/ZapisKurzu/" . $oKurzy); ?>'">
+                                    Zapsat se
+                                </button>
 
                             </label>
 
                     </div>
-    
+
                     </form>
-    <?php  }
-    else {
-        echo "<div class='container'> <label style='color:red'>&nbsp&nbspV kurzu je již přihlášený maximální počet účastníků</label></div>";
-    }
+                    <?php   } else {
+                    echo "<div class='container'> <label style='color:red'>&nbsp&nbspV kurzu je již přihlášený maximální počet účastníků</label></div>";
+                    if ($oFronta != $kurzy[0]->idKurz) {
+                    ?>
+                        <div class='container'>
+                            <div>
+                                <label for="terms_and_conditions">&nbsp&nbspSouhlasím s pokyny</label>
+                                <input type="checkbox" id="terms_and_conditions" value="1" onclick="terms_changed(this)" />
+                            </div>
+                            <button type="button" class="btn btn-primary" id="submit_button" disabled onclick="window.location = '<?php echo site_url("Main/ZapisFronta/" . $oKurzy); ?>'">
+                                Přidat se do fronty
+                            </button>
+                        </div>
+    <?php
+                    } else {
+                        echo "<div class='container'> <label style='color:red'>&nbsp&nbspČekáš ve frontě</label></div>";
+                    }
+                }
             }
         }
     }

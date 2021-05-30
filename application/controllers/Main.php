@@ -95,6 +95,7 @@ class Main extends CI_Controller
             $data['kurzy'] = $this->kurzy->get_kurz($id);
             $data['prihlaseny_kurz'] = $this->kurzy->prihlaseny_kurz($email);
             $data['prihlaseni'] = $this->kurzy->prihlaseni_studenti_kurz($id);
+            $data['fronta'] = $this->kurzy->prihlaseni_studenti_fronta($id);
 
             $this->load->view('templates/Header');
             $this->load->view('pages/Detailne_PrehledKurzu', $data);
@@ -115,6 +116,18 @@ class Main extends CI_Controller
             redirect('Main/Invalid');
         }
     }
+    public function ZapisFronta($id)
+    {
+        if ($this->session->userdata('currently_logged_in')) {
+            $email = $this->session->userdata('email');
+            $data['prihlaseni'] = $this->kurzy->zapis_do_fronty($email, $id);
+
+            $this->Detailne_PrehledKurzu($id);
+        } else {
+            redirect('Main/Invalid');
+        }
+    }
+  
 
     public function UcitelKurz()
     {
@@ -164,6 +177,7 @@ class Main extends CI_Controller
             redirect('Main/Invalid');
         }
     }
+    
     public function smazatKurz($id)
     {
         if ($this->session->userdata('currently_logged_in')) {
