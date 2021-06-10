@@ -1,4 +1,4 @@
-[dokumentace](dokumentace_uvod.pdf) <br>
+[dokumentace](dokumentace_kurzy.pdf) <br>
 [diagram užití](diagram_text.md) <br> 
 [wireframe](wireframe_text.md) <br>
 [ER-model](ER_model_kurz.png) <br>
