@@ -36,5 +36,6 @@ Našim plánem na druhé pololetí, je pokračovat v rozpracovaném projektu.
 
 ## Webová stránka
 http://kurzy.4fan.cz/ <br>
-Přihlašovací údaje pro studenta: student@seznam.cz heslo - student<br>
-Přihlašovacá údaje učitele: ucitel@seznam.cz heslo - ucitel <br>
+Přihlašovací údaje pro studenta: student heslo - student<br>
+Přihlašovacá údaje učitele: ucitel heslo - ucitel <br>
+Přihlašovacá údaje admina: admin heslo - admin <br>
