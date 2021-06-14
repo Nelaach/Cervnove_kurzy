@@ -32,7 +32,7 @@ Našim plánem na druhé pololetí, je pokračovat v rozpracovaném projektu.
 * Účastník musí potvrdit přečtení pokynů při zápisu - pokyny se mu zobrazí
 
 ## Dokumentace
-[dokumentace](/doc) <br>
+[dokumentace](/doc) <br> (Po kliknutí dole přehled jednotlivých částí dokumentace)
 
 ## Webová stránka
 http://kurzy.4fan.cz/ <br>
