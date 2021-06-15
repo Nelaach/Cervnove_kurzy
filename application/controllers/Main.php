@@ -196,6 +196,19 @@ class Main extends CI_Controller
         }
     }
 
+    public function zvyrazneni()
+    {
+        $this->load->view('PrehledKurzu');
+        if ($this->session->userdata('currently_logged_in'))
+        {
+            $this->kurzy->moje_kurzy();
+        }
+        else
+        {
+            redirect('Main/Invalid');
+        }
+    }
+
 
     public function invalid()
     {

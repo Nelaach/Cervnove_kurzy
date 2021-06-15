@@ -153,4 +153,11 @@ class Kurzy extends CI_Model
 
                 $this->db->query("UPDATE uzivatel SET kurz_idKurz='$oIdKurz' where idUzivatel='" . $idUzivatel . "'");
         }
+        public function moje_kurzy()
+        {
+                $mujkurz = $this->db->query(
+                        'SELECT * FROM kurz INNER JOIN uzivatel ON kurz.idKurz = uzivatel.kurz_idKurz WHERE 1'
+                )->result();
+                return $mujkurz->result();
+        }
 }

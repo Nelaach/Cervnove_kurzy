@@ -102,6 +102,7 @@
             <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/jquery.dataTables.min.js></script>
             <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/dataTables.bootstrap4.min.js></script>
         </div>
+        <button class="btn btn-primary" type="button"><a href="<?php echo base_url('main/zvyrazneni')?>">Zvýraznění mých kurzů</a></button>
 
 </body>
 
